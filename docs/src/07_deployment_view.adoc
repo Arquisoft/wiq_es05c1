@@ -1,0 +1,16 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-deployment-view]]
+
+
+== Deployment View
+
+
+image::07-diagramaDespliegue.png["Building Block general diagram"] 
+
+Basically when a user wants to use the application, using his web browser
+he can connect to the application server that is a VM in hosted in Azure
+orientated to microservices. That means that all the modules inside it
+are dockerized in a container. The QuestionGenerator interacts with WikiData
+throught their API and we have also two MongoDB databases one for users
+and another to store questions.

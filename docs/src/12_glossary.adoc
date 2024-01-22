@@ -1,0 +1,27 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-glossary]]
+== Glossary
+
+[role="arc42help"]
+
+[cols="e,2e" options="header"]
+|===
+|Term |Definition
+
+|Accessibility|Accessibility is the practice of designing products, devices, services, or environments to be usable by people with disabilities. It aims to ensure that everyone, regardless of their physical or cognitive abilities, can perceive, understand, navigate, and interact with digital or physical environments effectively and without barriers. 
+|API|An API (Application Programming Interface) is a set of rules, protocols, and tools that enables different software applications to communicate and interact with each other. It defines the methods and data formats that applications can use to request and exchange information, allowing for seamless integration and interoperability between systems, services, and platforms.
+|Back end|The back end is the part of a web application that operates behind the scenes and is responsible for managing and processing data, as well as handling requests from the front end. It includes the server, application logic, and database.
+|Database|Database is a structured collection of data that is organized in a way that allows for efficient storage, retrieval, manipulation, and management. They facilitate data organization, retrieval, and analysis, enabling businesses to make informed decisions, support transactional operations, and deliver valuable services to users. 
+|Docker|Docker is a platform that simplifies the process of developing, deploying, and running applications by utilizing containerization technology.
+|Front end|Front end is the part of a web application that users interact with directly. It encompasses everything that users see, touch, and interact with in their web browsers. This includes the user interface (UI), design elements, layouts, content, and interactive features.
+|GitHub|GitHub is a web-based platform and version control system that facilitates collaboration and software development workflows.
+|JavaScript|JavaScript is a programming language primarily employed for web development. It enables developers to add interactivity, dynamic behavior, and client-side scripting to web pages.
+|JSON|Stands for JavaScript Object Notation. It's a lightweight data interchange format that is easy for humans to read and write and easy for machines to parse and generate.
+|MongoDB|MongoDB is a NoSQL database that stores data in a flexible, document-oriented format called BSON (Binary JSON). It is designed for scalability, high performance, and ease of development.
+|Node.js|Node.js is a server-side runtime environment that allows developers to run JavaScript code outside of a web browser.
+|Performance|Performance refers to the responsiveness, speed, and efficiency of a system or application in executing tasks and handling user interactions. It encompasses factors such as response time, throughput, resource consumption, and scalability, all of which contribute to a satisfactory user experience. 
+|React|React is a JavaScript library for building interactive and dynamic user interfaces.
+|Usability|Usability refers to the extent to which a product or system can be used by specified users to achieve specified goals with effectiveness, efficiency, and satisfaction. It focuses on enhancing the user experience by ensuring that interfaces are intuitive, tasks are easy to accomplish, and interactions are pleasant. 
+|Wikidata|Wikidata is an open knowledge base. It serves as a centralized repository for structured data.
+|===

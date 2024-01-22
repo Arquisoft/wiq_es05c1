@@ -1,0 +1,41 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-runtime-view]]
+== Runtime View
+
+
+=== Register user
+
+image::06-registerSecuencia.png["Register secuence diagram image"] 
+
+1. The user wants to register in the sistem
+2. The app redirects the register request to the RegisterService
+3. The register service sends to the database the data to get information about it
+4. A response is sent by the database with information about that user in process of registration
+5. The RegisterService validates if the user is correct with that info recieved
+6. If the check was afirmative then the RegisterService registre the user
+7. The RegisterService inform with the result the app
+8. Finally the app carries that result to the user 
+
+
+=== Login
+
+image::06-loginSecuencia.png["Login secuence diagram image"] 
+
+1. The user wants to login his account
+2. The app redirects the login request to the LoginService
+3. The LoginService request information about that login data recieved
+4. A response is sent by the database with the requested data
+5. After checking if it's a valid login the LoginService sends a response to the app
+6. Finally the app inform the user about his login process
+
+
+=== Request a question
+
+image::06-generateQuestion.png["NextQuestion secuence diagram image"] 
+
+1. The QuestionService wants to generate a question
+2. It requests all the necesary info to build a question to WikiData
+3. WikiData responds with the requested data
+4. The QuestionService builds the question with the data recieved
+5. Finally the QuestionService writes the new question in the QuestionsDB

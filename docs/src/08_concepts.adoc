@@ -1,0 +1,33 @@
+ifndef::imagesdir[:imagesdir: ../images]
+
+[[section-concepts]]
+== Cross-cutting Concepts
+
+
+
+=== Domain concepts
+Visit https://github.com/Arquisoft/wiq_es05c1/wiki/Domain-Model to consult our Domain model.
+
+
+=== User Experience
+
+The user interface is the part of our application with which users interact directly. 
+It's designed to be intuitive and easy to use, providing a smooth and pleasant experience for users as they navigate through the various functions and features of the application.
+
+The user will either register in the application or log in if they have already registered before. 
+If they have played before, they will be able to view different metrics regarding those games. 
+Additionally, they can start a new game at any time and, upon completion, view the statistics of their results.
+
+
+=== Security & Safety
+     - Privacy: The data introduced will be private and not visible to other users.
+     - The password will be stored encrypted.
+    
+
+=== Architecture and design patterns
+In development...
+
+
+=== Development concepts
+
+    * Test: Realizadas pruebas de testing del microservicio gateway-service y del componente de webapp Game,
