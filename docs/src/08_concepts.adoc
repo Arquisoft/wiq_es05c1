@@ -56,18 +56,22 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 
 
-=== _<Concept 1>_
-
-_<explanation>_
+=== Domain model
 
 
 
-=== _<Concept 2>_
+=== User interface
 
-_<explanation>_
+The user interface is the part of our application with which users interact directly. 
+It's designed to be intuitive and easy to use, providing a smooth and pleasant experience for users as they navigate through the various functions and features of the application.
 
-...
+=== Security
 
-=== _<Concept n>_
 
-_<explanation>_
+
+=== Testability
+
+
+
+=== Development concepts
+

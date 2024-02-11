@@ -54,6 +54,8 @@ This application draws inspiration from the renowned Spanish television program 
 * The application offers a question-based game similar to "Saber y Ganar" .
 * The primary objective of the project is to provide an interactive and enjoyable platform for users to engage in question and answer contests, promoting both entertainment and learning.
 * Users have access to various metrics regarding their participation, including the number of games played, correct and incorrect answers, and time spent on each question.
+
+
 === Technical Context
 
 [role="arc42help"]
