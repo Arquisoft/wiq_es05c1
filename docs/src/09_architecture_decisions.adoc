@@ -33,3 +33,17 @@ See https://docs.arc42.org/section-9/[Architecture Decisions] in the arc42 docum
 There you will find links and examples about ADR.
 
 ****
+
+[options="header",cols="1,2,2"]
+|===
+|Date|Title|Decision|Explanation
+|08/02/2024|Language Selection|English|English is chosen for its widespread international use
+|08/02/2024|Programming Languages|React and Javascript|JavaScript is selected due to team proficiency, especially for API usage
+|08/02/2024|Database Platform|MongoDB|MongoDB is opted for as the default database solution
+|08/02/2024|Version Control System|Git-GitHub|Git-GitHub is preferred for its familiarity and utility
+|08/02/2024|Data Collection Method|WikiData|The choice of WikiData is dictated by project constraints
+|===
+
+Consequences::
+As a team, we recognize the need to familiarize ourselves with React, MongoDB, and Wikidata, as most of us are not yet proficient in their usage. 
+We are committed to investing the necessary time and effort to acquire the requisite skills and expertise in utilizing these technologies effectively for our project's success.
