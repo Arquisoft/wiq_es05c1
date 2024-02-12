@@ -34,7 +34,7 @@ There you will find links and examples about ADR.
 
 ****
 
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2,2,2"]
 |===
 |Date|Title|Decision|Explanation
 |08/02/2024|Language Selection|English|English is chosen for its widespread international use
