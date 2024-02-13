@@ -20,11 +20,25 @@ image::registerSecuencia.png["Register secuence diagram image"]
 
 === Login
 
-image::logingSecuencia.png["Login secuence diagram image"] 
+image::loginSecuencia.png["Login secuence diagram image"] 
 
 1. The user wants to login his account
 2. The app redirects the login request to the LoginService
 3. The LoginService request information about that login data recieved
 4. A response is sent by the database with the requested data
 5. After checking if it's a valid login the LoginService sends a response to the app
-7. Finally the app inform the user about his login process
+6. Finally the app inform the user about his login process
+
+
+=== Request a question
+
+image::nextQuestion.png["NextQuestion secuence diagram image"] 
+
+1. The user asks for a new question
+2. The app redirects that request to the QuestionGenerator
+3. The QuestionGenerator generates a heather for the question
+4. The QuestionGenerator requests the correct answer to WikiData
+5. WikiData sends that answer data
+6. The QuestionGenerator builds the question with the answer and wrong options
+7. The built question is sent to the app
+8. The app shows the question to the User
