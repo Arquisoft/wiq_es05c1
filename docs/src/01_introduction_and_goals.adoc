@@ -104,7 +104,7 @@ These stakeholders determine the extent and the level of detail of your work and
 Table with role names, person names, and their expectations with respect to the architecture and its documentation.
 ****
 
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2,2,2,2"]
 |===
 |Role/Name | Expectations
 | HappySw | Interested in making the application work as well as possible to please users and their contractors.
