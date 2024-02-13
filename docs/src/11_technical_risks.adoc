@@ -30,3 +30,19 @@ ifndef::imagesdir[:imagesdir: ../images]
 |It can happen that we don't archieve what it's requested into the project in time and end up sending an uncompleted final product or during the middle deadlines 
 |To avoid this we have to keep a good rhythm advancing and planing good and adequated tasks in the weekly meetings done in the labs so we don't run out of time not done
 |===
+
+=== Technical Debt
+
+[options="header" frame=all]
+|===
+|Technical Debt |Description 
+
+|Space 1.1
+|Space 1.2
+
+|Space 2.1
+|Space 2.2
+
+|Space 3.1
+|Space 3.2
+|===
