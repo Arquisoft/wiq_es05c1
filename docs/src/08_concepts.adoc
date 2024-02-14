@@ -56,22 +56,50 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 ****
 
 
-=== Domain model
+=== Domain concepts
+ User Model
+-------------
+- ID (Primary Key)
+- First Name
+- Last Name
+- Email
+- Password
+- Role
 
 
-
-=== User interface
+=== User Experience
 
 The user interface is the part of our application with which users interact directly. 
 It's designed to be intuitive and easy to use, providing a smooth and pleasant experience for users as they navigate through the various functions and features of the application.
 
-=== Security
+The user will either register in the application or log in if they have already registered before. 
+If they have played before, they will be able to view different metrics regarding those games. 
+Additionally, they can start a new game at any time and, upon completion, view the statistics of their results.
 
 
+=== Security & Safety
+     - Privacy: The data introduced will be private and not visible to other users.
+     - The password will be stored encrypted.
+    
 
-=== Testability
+=== Architecture and design patterns
+In development...
 
+=== Under the  hood
+In development...
 
 
 === Development concepts
+
+    * Build, Test, Deploy
+    * Code generation
+    * Migration
+    * Configurability
+
+
+    
+
+
+=== Operation concepts
+    
 
