@@ -8,3 +8,9 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 image::diagramaDespliegue.png["Building Block general diagram"] 
 
+Basically when a user wants to use the application, using his web browser
+he can connect to the application server where the web app will use some
+services also alocated there such as the QuestionGenerator or the LoginManager.
+Also these services make use of the WikiData API and database and also of 
+a database unique for the application to save things as player statistics
+or info of them.
