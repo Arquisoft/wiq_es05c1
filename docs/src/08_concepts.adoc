@@ -57,8 +57,7 @@ See https://docs.arc42.org/section-8/[Concepts] in the arc42 documentation.
 
 
 === Domain concepts
- User Model
--------------
+User Model
 - ID (Primary Key)
 - First Name
 - Last Name
