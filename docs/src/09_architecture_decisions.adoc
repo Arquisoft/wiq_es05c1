@@ -34,16 +34,12 @@ There you will find links and examples about ADR.
 
 ****
 
-[options="header",cols="1,2,2,2"]
+[options="header",cols="1,2,2,2,2,2"]
 |===
-|Date|Title|Decision|Explanation
-|08/02/2024|Language Selection|English|English is chosen for its widespread international use
-|08/02/2024|Programming Languages|React and Javascript|JavaScript is selected due to team proficiency, especially for API usage
-|08/02/2024|Database Platform|MongoDB|MongoDB is opted for as the default database solution
-|08/02/2024|Version Control System|Git-GitHub|Git-GitHub is preferred for its familiarity and utility
-|08/02/2024|Data Collection Method|WikiData|The choice of WikiData is dictated by project constraints
+|Date|Title|State|Context|Decision|Consequences
+|08/02/2024|Language Selection for documentation|Accepted|The project requires documentation to be written|English, is chosen for its widespread international use|The project documentation can reach more people, but since it is not our first language, it may not be very well written
+|08/02/2024|Programming Languages|Accepted|The proyect requires the develop of a web app|React and Javascript, JavaScript is selected due to team proficiency|We need to learn how to use React, and maybe other languages are better suited for this project
+|08/02/2024|Database Platform|Accepted|The project requires storing user and question data|MongoDB is chosen as the default database solution|Learning MongoDB is necessary
+|08/02/2024|Version Control System|Accepted|As a team and scalable project, version control software is needed|Git-GitHub is chosen as it's a project constraint.|The choice of Github is dictated by project constraints
+|08/02/2024|Data Collection Method|Accepted|The project requires dynamically generated questions|WikiData is chosen as it's a project constraint|The choice of WikiData is dictated by project constraints
 |===
-
-Consequences::
-As a team, we recognize the need to familiarize ourselves with React, MongoDB, and Wikidata, as most of us are not yet proficient in their usage. 
-We are committed to investing the necessary time and effort to acquire the requisite skills and expertise in utilizing these technologies effectively for our project's success.

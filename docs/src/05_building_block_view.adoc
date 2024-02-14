@@ -40,7 +40,11 @@ See https://docs.arc42.org/section-5/[Building Block View] in the arc42 document
 
 ****
 
+image::05-ScopeAndContext.png["Scope and Context"]
+
 === Whitebox WIQ
+
+image::05-Level1.png["Level 1"]
 
 [role="arc42help"]
 ****
@@ -189,6 +193,8 @@ Leave out normal, simple, boring or standardized parts of your system
 
 ==== White Box User Interface
 
+image::05-UserInterface-Level2.png["Level 2 User Interface"]
+
 [role="arc42help"]
 ****
 ...describes the internal structure of _building block 1_.
@@ -198,11 +204,15 @@ _<white box template>_
 
 ==== White Box Business Logic
 
+image::05-BussinesLogic-Level2.png["Level 2 Business Logic"]
+
 
 _<white box template>_
 
 
 ==== White Box Database
+
+image::05-Database-Level2.png["Level 2 Database"]
 
 
 _<white box template>_
