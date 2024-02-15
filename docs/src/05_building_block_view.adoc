@@ -3,7 +3,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-building-block-view]]
 
 
-== Building Block View
+== Building Block View (In progress)
 
 [role="arc42help"]
 ****
@@ -40,7 +40,11 @@ See https://docs.arc42.org/section-5/[Building Block View] in the arc42 document
 
 ****
 
-=== Whitebox Overall System
+image::05-ScopeAndContext.png["Scope and Context"]
+
+=== Whitebox WIQ
+
+image::05-Level1.png["Level 1"]
 
 [role="arc42help"]
 ****
@@ -67,11 +71,23 @@ _**<Overview Diagram>**_
 
 Motivation::
 
-_<text explanation>_
+The motivation for undertaking this decomposition is to gain a clear vision of the system developed for the WIQ application. 
+By breaking down the system into its constituent building blocks, we aim to establish a comprehensive understanding of its structure and functionality.
 
 
 Contained Building Blocks::
 _<Description of contained building block (black boxes)>_
+
+User Interface (Frontend)
+
+Business Logic (Backend)
+
+Database
+
+API User
+
+API Questions
+
 
 Important Interfaces::
 _<Description of important interfaces>_
@@ -86,8 +102,8 @@ responsibility according to the following schema:
 [cols="1,2" options="header"]
 |===
 | **Name** | **Responsibility**
-| _<black box 1>_ | _<Text>_
-| _<black box 2>_ | _<Text>_
+| _<black box 1>_ | _<Text>_
+| _<black box 2>_ | _<Text>_
 |===
 
 
@@ -97,7 +113,7 @@ Its headline is the name of the black box.
 ****
 
 
-==== <Name black box 1>
+==== User Interface
 
 [role="arc42help"]
 ****
@@ -113,7 +129,9 @@ according the the following black box template:
 
 ****
 
-_<Purpose/Responsibility>_
+Responsibility::
+
+Provides the interface to register, play and check participation history
 
 _<Interface(s)>_
 
@@ -125,16 +143,33 @@ _<(Optional) Fulfilled Requirements>_
 
 _<(optional) Open Issues/Problems/Risks>_
 
+==== Business Logic
 
+Responsibility::
 
+Automatically generate questions and corresponding answers from Wikidata data.
+Manages the time frame allocated for answering questions.
 
-==== <Name black box 2>
+...
 
-_<black box template>_
+==== Database
 
-==== <Name black box n>
+Responsibility::
 
-_<black box template>_
+Stores information about users, games, questions and correct/failed answers.
+
+==== API User
+
+Responsibility::
+
+The system will allow access to user information through an API.
+
+==== API Questions
+
+Responsibility::
+
+The system will allow access to the information of the questions generated through an API.
+
 
 
 ==== <Name interface 1>
@@ -156,7 +191,9 @@ Please prefer relevance over completeness. Specify important, surprising, risky,
 Leave out normal, simple, boring or standardized parts of your system
 ****
 
-==== White Box _<building block 1>_
+==== White Box User Interface
+
+image::05-UserInterface-Level2.png["Level 2 User Interface"]
 
 [role="arc42help"]
 ****
@@ -165,15 +202,28 @@ Leave out normal, simple, boring or standardized parts of your system
 
 _<white box template>_
 
-==== White Box _<building block 2>_
+==== White Box Business Logic
+
+image::05-BussinesLogic-Level2.png["Level 2 Business Logic"]
 
 
 _<white box template>_
 
-...
 
-==== White Box _<building block m>_
+==== White Box Database
 
+image::05-Database-Level2.png["Level 2 Database"]
+
+
+_<white box template>_
+
+==== White Box API User
+
+
+_<white box template>_
+
+
+==== White Box API Questions
 
 _<white box template>_
 
