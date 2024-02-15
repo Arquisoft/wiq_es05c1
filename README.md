@@ -15,15 +15,20 @@ This repo is a basic application composed of several components.
 
 Both the user and auth service share a Mongo database that is accessed with mongoose.
 
+## Members of the group
+  Adrián Santamarina
+
 ## Quick start guide
+
+## Team Members
+### David Gonzalez
 
 ### Using docker
 
 The fastest way for launching this sample project is using docker. Just clone the project:
 
 ```sh
-git clone https://github.com/Arquisoft/wiq_es05c.git
-```
+git clone https://github.com/Arquisoft/wiq_es05c.git 
 
 and launch it with docker compose:
 
@@ -112,4 +117,3 @@ This action uses three secrets that must be configured in the repository:
 - DEPLOY_KEY: key to authenticate the user in the remote machine.
 
 Note that this action logs in the remote machine and downloads the docker-compose file from the repository and launches it. Obviously, previous actions have been executed which have uploaded the docker images to the GitHub Packages repository.
- 
