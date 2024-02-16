@@ -6,7 +6,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 === Register user
 
-image::registerSecuencia.png["Register secuence diagram image"] 
+image::06-registerSecuencia.png["Register secuence diagram image"] 
 
 1. The user wants to register in the sistem
 2. The app redirects the register request to the RegisterService
@@ -20,7 +20,7 @@ image::registerSecuencia.png["Register secuence diagram image"]
 
 === Login
 
-image::loginSecuencia.png["Login secuence diagram image"] 
+image::06-loginSecuencia.png["Login secuence diagram image"] 
 
 1. The user wants to login his account
 2. The app redirects the login request to the LoginService
@@ -32,7 +32,7 @@ image::loginSecuencia.png["Login secuence diagram image"]
 
 === Request a question
 
-image::nextQuestion.png["NextQuestion secuence diagram image"] 
+image::06-nextQuestion.png["NextQuestion secuence diagram image"] 
 
 1. The user asks for a new question
 2. The app redirects that request to the QuestionGenerator
