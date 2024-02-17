@@ -3,12 +3,12 @@
 
 === Technology Decisions
 The following technologies are used in the development of our application:
-* *React*: JavaScript library for building efficient user interfaces.
-* *JavaScript*: Chosen language for application development.
-* *GitHub*: Platform that allows us to have a repository where to develop the project and perform different actions such as creating issues or tasks.
-* *MongoDB*: Non-relational database we will use for the project.
-* *Docker*: Virtualization platform where we will deploy the project.
-* *Wikidata*: Wikidata is a knowledge base that provides data sources, used to obtain information for the game. In this case, it is mandatory.
+* *_React_*: JavaScript library for building efficient user interfaces.
+* *_JavaScript_*: Chosen language for application development.
+* *GitHub_*: Platform that allows us to have a repository where to develop the project and perform different actions such as creating issues or tasks.
+* *_MongoDB_*: Non-relational database we will use for the project.
+* *_Docker_*: Virtualization platform where we will deploy the project.
+* *_Wikidata_*: Wikidata is a knowledge base that provides data sources, used to obtain information for the game. In this case, it is mandatory.
 
 === Top-level Decomposition
 
@@ -18,6 +18,6 @@ The following technologies are used in the development of our application:
 
 === Organizational decisions
 Here are the organization decisions made:
-* *Language*: We will use English as the primary language for both documentation and code.
-* *GitHub issues*: We will use GitHub issues as the main source for problem resolution, so that whenever something poses an obstacle, it will be documented in GitHub issues.
-* *GitHub projects*: GitHub projects allow us to organize work based on issues in a Kanban-style, enabling us to see issues that are in progress, those that are not, and those that are completed.
+* *_Language_*: We will use English as the primary language for both documentation and code.
+* *_GitHub issues_*: We will use GitHub issues as the main source for problem resolution, so that whenever something poses an obstacle, it will be documented in GitHub issues.
+* *_GitHub projects_*: GitHub projects allow us to organize work based on issues in a Kanban-style, enabling us to see issues that are in progress, those that are not, and those that are completed.
