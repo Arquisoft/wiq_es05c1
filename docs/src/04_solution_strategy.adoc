@@ -11,10 +11,16 @@ The following technologies are used in the development of our application:
 * *_Wikidata_*: Wikidata is a knowledge base that provides data sources, used to obtain information for the game. In this case, it is mandatory.
 
 === Top-level Decomposition
+==== IDE
+We have chosen Visual Studio Code as our platform since we have experience with it and it is the platform we will work best with.
 
+==== Diagram design tools
+We will use PlantUML as the tool for creating diagrams since it is the recommended one for the course.
+
+-- In progress
 
 === Key quality goals
-
+-- In progress --
 
 === Organizational decisions
 Here are the organization decisions made:
