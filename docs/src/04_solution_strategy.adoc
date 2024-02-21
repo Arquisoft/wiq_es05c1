@@ -17,8 +17,6 @@ We have chosen Visual Studio Code as our platform since we have experience with 
 ==== Diagram design tools
 We will use PlantUML as the tool for creating diagrams since it is the recommended one for the course.
 
--- In progress
-
 === Key quality goals
 -- In progress --
 
