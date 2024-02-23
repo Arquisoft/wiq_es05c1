@@ -1,32 +1,27 @@
-ifndef::imagesdir[:imagesdir: ../images]
-
 [[section-solution-strategy]]
 == Solution Strategy
 
+=== Technology Decisions
+The following technologies are used in the development of our application:
+* *_React_*: JavaScript library for building efficient user interfaces.
+* *_JavaScript_*: Chosen language for application development.
+* *_GitHub_*: Platform that allows us to have a repository where to develop the project and perform different actions such as creating issues or tasks.
+* *_MongoDB_*: Non-relational database we will use for the project.
+* *_Docker_*: Virtualization platform where we will deploy the project.
+* *_Wikidata_*: Wikidata is a knowledge base that provides data sources, used to obtain information for the game. In this case, it is mandatory.
 
-[role="arc42help"]
-****
-.Contents
-A short summary and explanation of the fundamental decisions and solution strategies, that shape system architecture. It includes
+=== Top-level Decomposition
+==== IDE
+We have chosen Visual Studio Code as our platform since we have experience with it and it is the platform we will work best with.
 
-* technology decisions
-* decisions about the top-level decomposition of the system, e.g. usage of an architectural pattern or design pattern
-* decisions on how to achieve key quality goals
-* relevant organizational decisions, e.g. selecting a development process or delegating certain tasks to third parties.
+==== Diagram design tools
+We will use PlantUML as the tool for creating diagrams since it is the recommended one for the course.
 
-.Motivation
-These decisions form the cornerstones for your architecture. They are the foundation for many other detailed decisions or implementation rules.
+=== Key quality goals
+-- In progress --
 
-.Form
-Keep the explanations of such key decisions short.
-
-Motivate what was decided and why it was decided that way,
-based upon problem statement, quality goals and key constraints.
-Refer to details in the following sections.
-
-
-.Further Information
-
-See https://docs.arc42.org/section-4/[Solution Strategy] in the arc42 documentation.
-
-****
+=== Organizational decisions
+Here are the organization decisions made:
+* *_Language_*: We will use English as the primary language for both documentation and code.
+* *_GitHub issues_*: We will use GitHub issues as the main source for problem resolution, so that whenever something poses an obstacle, it will be documented in GitHub issues.
+* *_GitHub projects_*: GitHub projects allow us to organize work based on issues in a Kanban-style, enabling us to see issues that are in progress, those that are not, and those that are completed.

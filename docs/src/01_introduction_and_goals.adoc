@@ -15,6 +15,10 @@ These include
 * relevant stakeholders and their expectations
 ****
 
+WIQ is a Web application requested by RTVE, in order to create an experimental online version of a question and
+answer contest similar to “Saber y Ganar”. 
+The development of said application has been entrusted to our company, HappySw.
+
 === Requirements Overview
 
 [role="arc42help"]
@@ -41,6 +45,12 @@ See https://docs.arc42.org/section-1/[Introduction and Goals] in the arc42 docum
 
 ****
 
+The main requirements to be met by our application will be:
+
+* A registration/access system in which users will be able to consult their participation history.
+* A random question generator to avoid repeating questions.
+* A base game mode, in which there will be a time limit to answer each question.
+
 === Quality Goals
 
 [role="arc42help"]
@@ -62,6 +72,15 @@ If you as an architect do not know how the quality of your work will be judged..
 .Form
 A table with quality goals and concrete scenarios, ordered by priorities
 ****
+
+[options="header",cols="1,2"]
+|===
+|Goals | Description
+| Usability | The user must be able to use the system in a simple and intuitive way, so that a good experience is provided.
+| Accesibility | The system should provide the necessary help to the user to be able to navigate through the program without any doubt.
+| Privacy | The system must ensure the privacy of users. In addition, they will not see the history of other users.
+| Performance | The application must have good performance, without excessive loading times.
+|===
 
 === Stakeholders
 
@@ -85,9 +104,11 @@ These stakeholders determine the extent and the level of detail of your work and
 Table with role names, person names, and their expectations with respect to the architecture and its documentation.
 ****
 
-[options="header",cols="1,2,2"]
+[options="header",cols="1,2"]
 |===
-|Role/Name|Contact|Expectations
-| _<Role-1>_ | _<Contact-1>_ | _<Expectation-1>_
-| _<Role-2>_ | _<Contact-2>_ | _<Expectation-2>_
+|Role/Name | Expectations
+| HappySw | Interested in making the application work as well as possible to please users and their contractors.
+| Developer Team | Interested in improving their skills by completing this application.
+| RTVE | Interested in the social and financial success of the application.
+| Users | Interested in the application being entertaining and simple.
 |===

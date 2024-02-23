@@ -33,3 +33,13 @@ See https://docs.arc42.org/section-9/[Architecture Decisions] in the arc42 docum
 There you will find links and examples about ADR.
 
 ****
+
+[options="header",cols="1,2,2,2,2,2"]
+|===
+|Date|Title|State|Context|Decision|Consequences
+|08/02/2024|Language Selection for documentation|Accepted|The project requires documentation to be written|English, is chosen for its widespread international use|The project documentation can reach more people, but since it is not our first language, it may not be very well written
+|08/02/2024|Programming Languages|Accepted|The proyect requires the develop of a web app|React and Javascript, JavaScript is selected due to team proficiency|We need to learn how to use React, and maybe other languages are better suited for this project
+|08/02/2024|Database Platform|Accepted|The project requires storing user and question data|MongoDB is chosen as the default database solution|Learning MongoDB is necessary
+|08/02/2024|Version Control System|Accepted|As a team and scalable project, version control software is needed|Git-GitHub is chosen as it's a project constraint.|The choice of Github is dictated by project constraints
+|08/02/2024|Data Collection Method|Accepted|The project requires dynamically generated questions|WikiData is chosen as it's a project constraint|The choice of WikiData is dictated by project constraints
+|===
