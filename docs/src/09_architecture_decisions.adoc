@@ -3,8 +3,8 @@ ifndef::imagesdir[:imagesdir: ../images]
 [[section-design-decisions]]
 == Architecture Decisions
 
-* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-1 [Architecture Decision 1-Language Selection for documentation]
-* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-2 [Architecture Decision 2-Programming Languages]
-* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-3 [Architecture Decision 3-Database Platform]
-* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-4 [Architecture Decision 4-Version Control System]
-* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-5 [Architecture Decision 5-Data Collection Method]
+* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-1[Architecture Decision 1-Language Selection for documentation]
+* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-2[Architecture Decision 2-Programming Languages]
+* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-3[Architecture Decision 3-Database Platform]
+* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-4[Architecture Decision 4-Version Control System]
+* https://github.com/Arquisoft/wiq_es05c/wiki/Architecture-Decision-5[Architecture Decision 5-Data Collection Method]
