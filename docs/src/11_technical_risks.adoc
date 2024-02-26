@@ -10,7 +10,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 |===
 |Risk |More detail |How to fight it  
 
-|A member quit the project
+|A member fire out the project
 |It's possible that due to reasons like having a lot of pressure or being overwhelmed by the project members of the group quit the project or the subject
 |Try to communicate with each other and having a sensible rhythm advancing with the project. Also helping each other when we can
 
@@ -24,11 +24,15 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 |New technologies
 |Some technologies that we will use in the projects are new for us such as React or managing a database due to our lack of experience
-|Learning the new things that we don't know and not being unwilling to confront new things such as technologies or languages that are new for us or near to new
+|Learning the new things that we don't know and not being unwilling to confront new things such as technologies or languages that we have lack of experience on them
 
-|Not arriving deadlines
+|Not accomplish deadlines
 |It can happen that we don't archieve what it's requested into the project in time and end up sending an uncompleted final product or during the middle deadlines 
 |To avoid this we have to keep a good rhythm advancing and planing good and adequated tasks in the weekly meetings done in the labs so we don't run out of time not done
+
+|Depending on extern technologies
+|It's possible that due to depend on external libraries such as react or external services like Azure we can find ourselves with the poject not working derivated from failures on that external technologies
+|Try to investigate and use reliable services and libraries that are not likely to end up deprecated or with bugs and failures on their releases
 |===
 
 === Technical Debt
