@@ -56,3 +56,13 @@ WHERE {
   ?state wdt:P1082 ?poblation .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
 }
+
+
+--Consulta libro y su autor --
+SELECT ?book ?bookLabel ?authorLabel
+WHERE {
+  ?book wdt:P31 wd:Q571 .
+  ?book wdt:P50 ?author .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+}
+
