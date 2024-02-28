@@ -27,3 +27,14 @@ WHERE
   ?country wdt:P1082 ?population. # Has population
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
+
+--Consulta que devuelve club de futbol y su estadio --
+
+SELECT ?club ?clubLabel ?stadiumLabel
+WHERE {
+  ?club wdt:P31 wd:Q17270000 .
+  ?club p:P115 ?statement .
+  ?statement ps:P115 ?stadium .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+
