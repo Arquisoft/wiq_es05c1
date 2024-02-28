@@ -46,3 +46,13 @@ WHERE {
   ?statement ps:P36 ?capital .
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
+
+
+--Consulta estados de EEUU, capital y poblacion 
+SELECT ?state ?stateLabel ?capitalLabel ?poblation
+WHERE {
+  ?state wdt:P31 wd:Q35657 .
+  ?state wdt:P36 ?capital .
+  ?state wdt:P1082 ?poblation .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en".}
+}
