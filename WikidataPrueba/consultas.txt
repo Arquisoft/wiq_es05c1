@@ -77,7 +77,7 @@ WHERE {
 }
 LIMIT 4
 
---Consulta que me da peliculas su genero y año de publicacion --
+--Consulta que me da peliculas su genero y año de publicacion del director Steven Spielberg --
 
 SELECT ?film ?filmLabel ?genere ?d WHERE {
   {
