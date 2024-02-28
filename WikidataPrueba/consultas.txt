@@ -1,0 +1,29 @@
+--Consulta que devuelve pais y capital --
+
+SELECT ?country ?countryLabel ?capitalLabel
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078. # Instance of country
+  ?country wdt:P36 ?capital. # Has capital
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+
+
+--Consulta que devuelve pais y poblacion --
+SELECT ?country ?countryLabel ?population
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078. # Instance of country
+  ?country wdt:P1082 ?population. # Has population
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+
+--Consulta que devuelve pais, capital y poblacion --
+SELECT ?country ?countryLabel ?capitalLabel ?population
+WHERE
+{
+  ?country wdt:P31 wd:Q3624078. # Instance of country
+  ?country wdt:P36 ?capital. # Has capital
+  ?country wdt:P1082 ?population. # Has population
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
