@@ -161,9 +161,7 @@ class ObtenerPreguntaWikiData {
               var respuestaCorrecta = preguntaCorrecta.result;
               var consulta = textoPregunta.replace('{RELLENAR}', pregunta);
 
-              generarPregunta(consulta, respuestaCorrecta);
-
-                       
+              generarPregunta(consulta, respuestaCorrecta);                       
             } 
           }
         };    
