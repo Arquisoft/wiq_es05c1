@@ -8,6 +8,7 @@ const port = 8000;
 
 const authServiceUrl = process.env.AUTH_SERVICE_URL || 'http://localhost:8002';
 const userServiceUrl = process.env.USER_SERVICE_URL || 'http://localhost:8001';
+const questionServiceUrl = process.env.QUESTION_SERVICE_URL || 'http://localhost:8003';
 
 app.use(cors());
 app.use(express.json());
@@ -40,6 +41,33 @@ app.post('/adduser', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
+
+app.get('/getQuestion', async (req, res) => {
+  try {
+    // llamamos al servicio de preguntas
+    const questionResponse = await axios.get(questionServiceUrl+'/getQuestion', req.body);
+    res.json(questionResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.get('/generateQuestions', async (req, res) => {
+  try {
+    console.log("Generando preguntas en el gateway");
+    // llamamos al servicio de preguntas
+    const questionResponse = await axios.get(questionServiceUrl+'/generateQuestions', req.body);
+    
+  } catch (error) {
+    if (error.response) {
+      res.status(error.response.status).json({ error: error.response.data.error });
+  } else {
+      res.status(500).json({ error: 'Error en la respuesta del servidor' });
+  }
+  }
+});
+
+
 
 // Start the gateway service
 const server = app.listen(port, () => {

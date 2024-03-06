@@ -49,3 +49,5 @@ class ObtenerPreguntas{
         };
     }
 }
+
+module.exports = ObtenerPreguntas;

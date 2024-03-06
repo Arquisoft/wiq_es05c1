@@ -1,10 +1,10 @@
 {
-    "name": "authservice",
+    "name": "questionservice",
     "version": "1.0.0",
-    "description": " Authentication service, in charge of authenticating users in the application",
+    "description": "Microservicio de preguntas",
     "main": "service.js",
     "scripts": {
-        "start": "node auth-service.js",
+        "start": "node question-service.js",
         "test": "jest"
     },
     "repository": {

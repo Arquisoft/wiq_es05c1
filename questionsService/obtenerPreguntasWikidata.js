@@ -118,6 +118,8 @@ class ObtenerPreguntaWikiData {
             //obtenemos las 4 entidades aleatorias que vamos a utilizar para generar la pregunta
             this.answers = indicesAleatorios.map(indice => entidades[indice]);
 
+            console.log("entramos en obtener informacion para pregunta");
+
             this.generarTextoPregunta();
         } 
     }    
@@ -126,6 +128,7 @@ class ObtenerPreguntaWikiData {
       obtenemos el valor que queremos de la entidad
     */
     obtenerValorPropiedad(binding, propertyName) {
+      console.log("entramos en obtener valor propiedad");
       //si tiene la 
         if (binding && binding.hasOwnProperty(propertyName)) {
             return binding[propertyName].value;
@@ -142,6 +145,7 @@ class ObtenerPreguntaWikiData {
         xhr.open('GET', "esqueletoPreguntas.xml", true);
     
         xhr.onload = () => {
+          console.log("entramos en generar texto pregunta");
           if (xhr.status === 200) {
             const xmlString = xhr.responseText;
             const parser = new DOMParser();
@@ -172,6 +176,7 @@ class ObtenerPreguntaWikiData {
       generamos un json con la info necesaria de la pregunta para poder guardarla en la base de datos
     */
     generarPregunta(consulta, respuestaCorrecta){
+      console.log("entramos en generar pregunta");
       var respuestasIncorrectas = [];
       var num = 0;
       //añadimos el resto de respuestas
@@ -193,6 +198,7 @@ class ObtenerPreguntaWikiData {
     }   
 
     obtenerPregunta(){
+      console.log("entramos en obtener pregunta");
       return finalQuestion;
     }
 }

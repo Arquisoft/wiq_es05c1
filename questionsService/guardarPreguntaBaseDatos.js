@@ -9,6 +9,7 @@ class GuardarBaseDatos{
     }
 
     guardarEnBaseDatos(){      
+      console.log("Guardando pregunta en la base de datos");
         // Connect to MongoDB
         const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionsdb';
         mongoose.connect(mongoUri);
@@ -21,6 +22,7 @@ class GuardarBaseDatos{
       }
 
     guardarCategoria(){
+      console.log("Guardando categoria");
       var idCategoria;
   
       Categoria.findOne({ textoPregunta: this.finalQuestion.category })
@@ -48,6 +50,7 @@ class GuardarBaseDatos{
     }
 
     guardarPreguntaTipo(idCategoria){
+      console.log("Guardando pregunta y tipo");
       var idTipo;
       // Comprobar si la pregunta ya existe
       Pregunta.findOne({ textoPregunta: this.finalQuestion.question })
@@ -100,6 +103,7 @@ class GuardarBaseDatos{
     }
 
     guardarPrimeraIncorrecta(idTipo){
+      console.log("Guardando primera incorrecta");
          //comprobar si la primera respuesta existe ya en la base de datos
          Respuesta.findOne({ textoRespuesta: this.finalQuestion.incorrect1 })
          .then(respuestaExistente => {
@@ -125,7 +129,8 @@ class GuardarBaseDatos{
          });
     }
 
-    guardarSegundaIncorrecta(idTipo){       
+    guardarSegundaIncorrecta(idTipo){    
+      console.log("Guardando segunda incorrecta");   
         //comprobar si la segunda respuesta existe ya en la base de datos
         Respuesta.findOne({ textoRespuesta: this.finalQuestion.incorrect2 })
         .then(respuestaExistente => {
@@ -152,6 +157,7 @@ class GuardarBaseDatos{
     }
 
     guardarTerceraIncorrecta(idTipo){
+      console.log("Guardando tercera incorrecta");
         //comprobar si la tercera respuesta existe ya en la base de datos
         Respuesta.findOne({ textoRespuesta: this.finalQuestion.incorrect3 })
         .then(respuestaExistente => {
