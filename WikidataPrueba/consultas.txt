@@ -103,6 +103,27 @@ SELECT ?film ?filmLabel ?genere ?d WHERE {
 }
 
                                                                             --CONSULTAS ENTRETENIMIENTO--
+# Consulta para obtener videojuegos y sus plataformas de desarrollo
+SELECT ?videojuego ?nombreVideojuego ?plataforma ?nombrePlataforma
+WHERE {
+  ?videojuego wdt:P31 wd:Q7889.  # Videojuegos (clase)
+  ?videojuego wdt:P178 ?plataforma.  # Relación "desarrollado para"
+  ?videojuego rdfs:label ?nombreVideojuego filter (lang(?nombreVideojuego) = "es").
+  ?plataforma rdfs:label ?nombrePlataforma filter (lang(?nombrePlataforma) = "es").
+}
+LIMIT 100
+
+
+# Consulta para obtener el nombre del videojuego y su género
+SELECT ?videojuego ?nombreVideojuego ?genero ?nombreGenero
+WHERE {
+  ?videojuego wdt:P31 wd:Q7889.  # Videojuegos (clase)
+  ?videojuego wdt:P136 ?genero.  # Relación "género"
+  ?videojuego rdfs:label ?nombreVideojuego filter (lang(?nombreVideojuego) = "es").
+  ?genero rdfs:label ?nombreGenero filter (lang(?nombreGenero) = "es").
+}
+LIMIT 100
+
 
                                                                             --CONSULTAS CIENCIA--
 
