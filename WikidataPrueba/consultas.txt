@@ -1,3 +1,4 @@
+                                                    --CONSULTAS GEOGRAFIA --
 --Consulta que devuelve pais y capital --
 
 SELECT ?country ?countryLabel ?capitalLabel
@@ -28,16 +29,6 @@ WHERE
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
 }
 
---Consulta que devuelve club de futbol y su estadio --
-
-SELECT ?club ?clubLabel ?stadiumLabel
-WHERE {
-  ?club wdt:P31 wd:Q17270000 .
-  ?club p:P115 ?statement .
-  ?statement ps:P115 ?stadium .
-  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-}
-
 --Consulta estado de EEUU y su capital --
 SELECT ?state ?stateLabel ?capitalLabel
 WHERE {
@@ -58,6 +49,19 @@ WHERE {
 }
 
 
+                                                          --CONSULTAS DEPORTES--
+--Consulta que devuelve club de futbol y su estadio --
+
+SELECT ?club ?clubLabel ?stadiumLabel
+WHERE {
+  ?club wdt:P31 wd:Q17270000 .
+  ?club p:P115 ?statement .
+  ?statement ps:P115 ?stadium .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+}
+
+
+                                                                               --CONSULTAS ARTE---
 --Consulta libro y su autor --
 SELECT ?book ?bookLabel ?authorLabel
 WHERE {
@@ -97,6 +101,16 @@ SELECT ?film ?filmLabel ?genere ?d WHERE {
   }
   SERVICE wikibase:label { bd:serviceParam wikibase:language "en". }
 }
+
+                                                                            --CONSULTAS ENTRETENIMIENTO--
+
+                                                                            --CONSULTAS CIENCIA--
+
+                                                                            --CONSULTAS HISTORIA--
+
+
+                                                                            --OTRAS CONSULTAS--
+
 
 --Consulta que me devuelve por orden descendente y solo 4 resultados las ciudades mas grandes por pais
 me devuelve el nombre de la ciudad, pais y poblacion --
