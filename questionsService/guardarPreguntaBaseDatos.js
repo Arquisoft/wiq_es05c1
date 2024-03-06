@@ -116,7 +116,7 @@ class GuardarBaseDatos{
            else{
              //comprobamos si ya existe el tipo en esa respuesta
              if (!respuestaExistente.tipos.includes(idTipo)) {
-               //agragamos el nuevo tipo
+               //agregamos el nuevo tipo
                respuestaExistente.tipos.push(idTipo);
    
                respuestaExistente.save();
@@ -142,7 +142,7 @@ class GuardarBaseDatos{
           else{
             //comprobamos si ya existe el tipo en esa respuesta
             if (!respuestaExistente.tipos.includes(idTipo)) {
-              //agragamos el nuevo tipo
+              //agregamos el nuevo tipo
               respuestaExistente.tipos.push(idTipo);
   
               respuestaExistente.save();
@@ -168,7 +168,7 @@ class GuardarBaseDatos{
            else{
              //comprobamos si ya existe el tipo en esa respuesta
              if (!respuestaExistente.tipos.includes(idTipo)) {
-               //agragamos el nuevo tipo
+               //agregamos el nuevo tipo
                respuestaExistente.tipos.push(idTipo);
    
                respuestaExistente.save();
