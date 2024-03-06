@@ -1,0 +1,10 @@
+<textoPreguntas>
+    <pregunta  question="pais" type="capital"> 
+        ¿Cuál es la capital de {RELLENAR}?
+    </pregunta>
+
+    <pregunta  question="estado" type="capital"> 
+        ¿Cuál es la capital del estado de {RELLENAR}?
+    </pregunta>
+    
+</textoPreguntas>
