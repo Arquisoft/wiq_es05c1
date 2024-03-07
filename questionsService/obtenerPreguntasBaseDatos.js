@@ -1,11 +1,8 @@
-const mongoose = require('mongoose');
 class ObtenerPreguntas{
 
     obtenerPregunta(){
          // Connect to MongoDB
-         const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionsdb';
-         mongoose.connect(mongoUri);
-         
+        
          var pregunta;
          var respuestaCorrecta;
          var respuestaIncorrecta1;

@@ -26,6 +26,7 @@ class ObtenerPreguntaWikiData {
         Se obtiene la consulta y la información que necesitamos para posteriores métodos
     */
     leerYSacarConsultas() {
+      console.log('Se ha cargado la query leer y sacar consultas');
         //abrimos el xml con las preguntas
         const xhr = new XMLHttpRequest();
         xhr.open('GET', "preguntas.xml", true);
@@ -35,10 +36,10 @@ class ObtenerPreguntaWikiData {
             const xmlString = xhr.responseText;
             const parser = new DOMParser();
             const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-            
+            console.log('Cargamos fichero');
             //obtenemos todas las consultas disponibles
             var preguntas = xmlDoc.getElementsByTagName('pregunta');
-    
+            console.log('Cargamos preguntas');
             //cogemos una consulta de forma aleatoria
             var pregunta = preguntas[Math.floor(Math.random() * preguntas.length)];
             //obtenemos la informacion relativa a la pregunta
@@ -49,12 +50,14 @@ class ObtenerPreguntaWikiData {
             //obtenemos la consulta que vamos a realizar
             var query = pregunta.getElementsByTagName('query')[0].textContent;
 
+            console.log('Justo antes del select');
             //obtenemos los datos que estan en la select de la consulta para posteriormente obtener la informacion del binding.result
             var consultaParte = query.match(/SELECT(.*?)WHERE/s)[1].trim();
                 
             // Dividir la parte de la consulta por los símbolos '?' para obtener las labels 
             this.labels = consultaParte.split('?').map(part => part.trim()).filter(part => part !== '');
 
+            console.log("SE HA CARGADO LA CONSULTA");
             //obtenemos todas las entradas de wikidata para esa query
             this.obtenerEntidadesConsulta(query);
             
@@ -74,7 +77,8 @@ class ObtenerPreguntaWikiData {
       Hace una llamada a la API para poder obtener la información relativa a la consulta
       Si la llamada tiene exito se llama a otro metodo para procesar la información
     */
-    obtenerEntidadesConsulta(consulta){               
+    obtenerEntidadesConsulta(consulta){     
+      console.log("ENTRA EN OBTENER ENTIDD");          
         const apiUrl = 'https://query.wikidata.org/sparql';
         
         $.ajax({

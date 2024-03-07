@@ -11,14 +11,11 @@ class GuardarBaseDatos{
     guardarEnBaseDatos(){      
       console.log("Guardando pregunta en la base de datos");
         // Connect to MongoDB
-        const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionsdb';
-        mongoose.connect(mongoUri);
-  
+        
         //primero deberiamos de guardar la categoria     
         this.guardarCategoria();
 
         //cerramos la conexion
-        mongoose.connection.close();
       }
 
     guardarCategoria(){
