@@ -7,7 +7,7 @@
             {
             ?country wdt:P31 wd:Q3624078. # Instance of country
             ?country wdt:P36 ?capital. # Has capital
-            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
             }
 
         </query>
@@ -20,7 +20,7 @@
             ?state wdt:P31 wd:Q35657 .
             ?state p:P36 ?statement .
             ?statement ps:P36 ?capital .
-            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
             }
 
         </query>

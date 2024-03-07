@@ -1,5 +1,3 @@
-const mongoose = require('mongoose');
-
 class GuardarBaseDatos{
 
     constructor(finalQuestion, choice, category){
@@ -9,14 +7,10 @@ class GuardarBaseDatos{
     }
 
     guardarEnBaseDatos(){      
-      console.log("Guardando pregunta en la base de datos");
-        // Connect to MongoDB
-        
-        //primero deberiamos de guardar la categoria     
-        this.guardarCategoria();
-
-        //cerramos la conexion
-      }
+      console.log("Guardando pregunta en la base de datos");        
+      //primero deberiamos de guardar la categoria     
+      this.guardarCategoria();
+    }
 
     guardarCategoria(){
       console.log("Guardando categoria");

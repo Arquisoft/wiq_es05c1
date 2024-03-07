@@ -1,8 +1,6 @@
 class ObtenerPreguntas{
 
-    obtenerPregunta(){
-         // Connect to MongoDB
-        
+    obtenerPregunta(){        
          var pregunta;
          var respuestaCorrecta;
          var respuestaIncorrecta1;

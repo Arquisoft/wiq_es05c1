@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
 
-// Conectar a la base de datos MongoDB
-
 //preguntas
 const preguntaSchema = new mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,    

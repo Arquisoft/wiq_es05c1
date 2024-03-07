@@ -9,7 +9,7 @@ class GenerarPregunta {
     ejecutarOperaciones() {
         console.log(`Ejecutando operaciones`);
         preguntaWiki.leerYSacarConsultas();
-        guardarPregunta.guardarEnBaseDatos(preguntaWiki.obtenerPregunta());
+        //guardarPregunta.guardarEnBaseDatos(preguntaWiki.obtenerPregunta());
     }
 }
 
