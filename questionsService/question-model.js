@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 
 //preguntas
 const preguntaSchema = new mongoose.Schema({
-    _id: mongoose.Schema.Types.ObjectId,    
     textoPregunta: {
         type: String,
         required: true
@@ -21,7 +20,6 @@ const Pregunta = mongoose.model('Pregunta', preguntaSchema);
 
 //categoria
 const categoriaSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   nombre: {
     type: String,
     required: true
@@ -32,7 +30,6 @@ const Categoria = mongoose.model('Categoria', categoriaSchema);
 
 //Respuesta
 const respuestaSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   textoRespuesta: {
     type: String,
     required: true
@@ -46,7 +43,6 @@ const Respuesta = mongoose.model('Respuesta', respuestaSchema);
 
 //Tipos
 const tiposSchema = new mongoose.Schema({
-  _id: mongoose.Schema.Types.ObjectId,
   idPreguntas: [{
     type: String,
     required: true

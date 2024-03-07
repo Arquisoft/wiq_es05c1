@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const xml2js = require('xml2js');
 const fs = require('fs');
 
+const Model = require('./question-model')
+
 const Question = require("./obtenerPreguntasBaseDatos");
 const question = new Question();
 
@@ -20,11 +22,10 @@ app.use(express.json());
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionsdb';
 mongoose.connect(mongoUri);
 
-const instancia =  newquestion.ejecutarOperaciones();
-
 app.get('/getQuestion', async(req,res)=> {
   try{  
     //coger pregunta bd
+    console.log("LLegamos al question service")
     const questions = await question.obtenerPregunta();
     //para devolver la pregunta
     res.json(questions);
@@ -37,9 +38,7 @@ app.get('/getQuestion', async(req,res)=> {
 
 app.get('/generateQuestions', async(req,res)=> {
     try{  
-      console.log("Generando preguntas en el question-service");  
       const instancia =  newquestion.ejecutarOperaciones();
-      console.log(`Ejecutado correctamente`);
      
     } catch(error) {
       res.status(error.response.status).json({ error: error.response.data.error });

@@ -6,10 +6,9 @@ const guardarPregunta = new GuardarPregunta();
 
 class GenerarPregunta {
     // Método para ejecutar las operaciones
-    ejecutarOperaciones() {
-        console.log(`Ejecutando operaciones`);
-        preguntaWiki.leerYSacarConsultas();
-        //guardarPregunta.guardarEnBaseDatos(preguntaWiki.obtenerPregunta());
+    async ejecutarOperaciones() {
+        await preguntaWiki.leerYSacarConsultas();
+        guardarPregunta.guardarEnBaseDatos(preguntaWiki.obtenerPregunta());
     }
 }
 
