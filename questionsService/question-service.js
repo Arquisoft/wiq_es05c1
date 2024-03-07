@@ -1,6 +1,5 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const Model = require('./question-model')
 
@@ -20,7 +19,7 @@ app.use(express.json());
 const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionsdb';
 mongoose.connect(mongoUri);
 
-app.get('/getQuestion', async(req,res)=> {
+/* app.get('/getQuestion', async(req,res)=> {
   try{  
     //coger pregunta bd
     const questions = await question.obtenerPregunta();
@@ -31,9 +30,9 @@ app.get('/getQuestion', async(req,res)=> {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
     
-});
+}); */
 
-app.get('/generateQuestions', async(req,res)=> {
+/* app.get('/generateQuestions', async(req,res)=> {
     try{  
       console.log("Generando preguntas en el question-service");  
       const instancia =  newquestion.ejecutarOperaciones();
@@ -44,7 +43,7 @@ app.get('/generateQuestions', async(req,res)=> {
     }
       
   });
-
+ */
 // Start the server
 const server = app.listen(port, () => {
   console.log(`Generate Service listening at http://localhost:${port}`);

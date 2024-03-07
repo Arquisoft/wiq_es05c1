@@ -1,9 +1,6 @@
 const mongoose = require('mongoose');
 
 // Conectar a la base de datos MongoDB
-mongoose.connect('mongodb://mongodb:27017/questionsdb', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Conexión exitosa a MongoDB'))
-  .catch(err => console.error('Error al conectar a MongoDB:', err));
 
 //preguntas
 const preguntaSchema = new mongoose.Schema({
