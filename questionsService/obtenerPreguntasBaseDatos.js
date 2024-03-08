@@ -1,27 +1,30 @@
 const mongoose = require('mongoose');
+
+const Categoria = mongoose.model('Categoria');
+const Pregunta = mongoose.model('Pregunta');
+const Tipos = mongoose.model('Tipos');
+const Respuesta = mongoose.model('Respuesta');
+
 class ObtenerPreguntas{
 
-    obtenerPregunta(){
-         // Connect to MongoDB
-         const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/questionsdb';
-         mongoose.connect(mongoUri);
-         
-         var pregunta;
-         var respuestaCorrecta;
-         var respuestaIncorrecta1;
-         var respuestaIncorrecta2;
-         var respuestaIncorrecta3;
+    obtenerPregunta(){    
+        console.log("Obteniendo pregunta");
+        var pregunta;
+        var respuestaCorrecta;
+        var respuestaIncorrecta1;
+        var respuestaIncorrecta2;
+        var respuestaIncorrecta3;
 
-         Pregunta.aggregate([
+        Pregunta.aggregate([
             { $sample: { size: 1 } }
         ]).then(pregunta => {
            var pregunta_id = pregunta._id;
            pregunta = pregunta.textoPregunta;
-            Tipo.findOne({ _id: { $in: pregunta.pregunta_id } }).then(tipo => {
-             console.log(tipo_id);
-             respuestaCorrecta = pregunta.respuestaCorrecta;
-             console.log(respuestaCorrecta);
-             Respuesta.aggregate([
+            Tipos.findOne({ _id: { $in: pregunta.pregunta_id } }).then(tipo => {
+            console.log(tipo_id);
+            respuestaCorrecta = pregunta.respuestaCorrecta;
+            console.log(respuestaCorrecta);
+            Respuesta.aggregate([
                 { $match: { nombreTipo: tipo._id, texto: { $ne: [respuestaCorrecta, "Ninguna de las anteriores" ]} } },
                 { $sample: { size: 3 } }
             
@@ -40,6 +43,12 @@ class ObtenerPreguntas{
             console.error(err);
         });
 
+        console.log(pregunta);
+        console.log(respuestaCorrecta);
+        console.log(respuestaIncorrecta1);
+        console.log(respuestaIncorrecta2);
+        console.log(respuestaIncorrecta3);
+
         return resultado = {
             pregunta: pregunta.textoPregunta,
             correcta: respuestaCorrecta,
@@ -49,3 +58,5 @@ class ObtenerPreguntas{
         };
     }
 }
+
+module.exports = ObtenerPreguntas;

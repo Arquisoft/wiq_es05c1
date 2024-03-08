@@ -1,3 +1,7 @@
+const xml2js = require('xml2js');
+const fs = require('fs');
+const axios = require('axios');
+
 class ObtenerPreguntaWikiData {
     
     constructor(language = 'es') {
@@ -16,8 +20,7 @@ class ObtenerPreguntaWikiData {
         this.answers;
 
         //para guardar toda la información relativa a las preguntas
-        this.finalQuestion;
-        
+        this.finalQuestion;        
     }
     
     /*
@@ -25,101 +28,107 @@ class ObtenerPreguntaWikiData {
         Posteriormente se elige una consulta al azar
         Se obtiene la consulta y la información que necesitamos para posteriores métodos
     */
-    leerYSacarConsultas() {
-        //abrimos el xml con las preguntas
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', "preguntas.xml", true);
-    
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            const xmlString = xhr.responseText;
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
-            
-            //obtenemos todas las consultas disponibles
-            var preguntas = xmlDoc.getElementsByTagName('pregunta');
-    
-            //cogemos una consulta de forma aleatoria
+    leerYSacarConsultas() {   
+      return new Promise((resolve, reject) => {
+        // Leer el archivo XML
+        fs.readFile('preguntas.xml', 'utf-8', (err, data) => {
+          
+          if (err) {
+          console.error('Error al leer el archivo:', err);
+            return;
+          }
+          
+          // Parsear el XML
+          xml2js.parseString(data, (parseErr, result) => {
+            if (parseErr) {
+              console.error('Error al analizar el XML:', parseErr);
+              return;
+            }
+            // Obtener las preguntas disponibles
+            var preguntas = result.preguntas.pregunta;
+          
+            // Seleccionar una pregunta aleatoria
             var pregunta = preguntas[Math.floor(Math.random() * preguntas.length)];
-            //obtenemos la informacion relativa a la pregunta
-            this.question = pregunta.getAttribute('question');
-            this.type = pregunta.getAttribute('type');
-            this.category = pregunta.getAttribute('category');
-
-            //obtenemos la consulta que vamos a realizar
-            var query = pregunta.getElementsByTagName('query')[0].textContent;
-
-            //obtenemos los datos que estan en la select de la consulta para posteriormente obtener la informacion del binding.result
+          
+            // Obtener la información relativa a la pregunta
+            this.question = pregunta.$.question;
+            this.type = pregunta.$.type;
+            this.category = pregunta.$.category;
+          
+            // Obtener la consulta
+            var query = pregunta.query[0];
             var consultaParte = query.match(/SELECT(.*?)WHERE/s)[1].trim();
-                
+                  
             // Dividir la parte de la consulta por los símbolos '?' para obtener las labels 
             this.labels = consultaParte.split('?').map(part => part.trim()).filter(part => part !== '');
-
+    
             //obtenemos todas las entradas de wikidata para esa query
-            this.obtenerEntidadesConsulta(query);
-            
-          } else {
-            console.error('Error al cargar el archivo:', xhr.statusText);
-          }
-        };
-    
-        xhr.onerror = () => {
-          console.error('Error de red al cargar el archivo.');
-        };
-    
-        xhr.send();
-      }
+            this.obtenerEntidadesConsulta(query)
+              .then(() => resolve())
+              .catch(error => reject(error));
+          });
+        });
+      });
+    }
 
     /*
       Hace una llamada a la API para poder obtener la información relativa a la consulta
       Si la llamada tiene exito se llama a otro metodo para procesar la información
     */
-    obtenerEntidadesConsulta(consulta){               
-        const apiUrl = 'https://query.wikidata.org/sparql';
-        
-        $.ajax({
-            url: apiUrl,
-            data: {
-                query: consulta,
-                format: 'json'
-            },
-            dataType: 'json',
-            success: this.obtenerInformacionParaPregunta.bind(this),
-            error: function(error) {
-                console.log('Error:', error);
-            }
+    obtenerEntidadesConsulta(consulta){    
+      return new Promise((resolve, reject) => { 
+          const apiUrl = 'https://query.wikidata.org/sparql';
+          
+        axios.get(apiUrl, {
+          params: {
+              query: consulta,
+              format: 'json'
+          }
+        })
+        .then(response => {
+            this.obtenerInformacionParaPregunta(response.data)
+              .then(() => resolve())
+              .catch(error => reject(error));
+        })
+        .catch(error => {
+            console.error('Error:', error);
         });
+      });
     }
 
     /*
       Obtenemos 4 entidades aleatorias de los datos devueltos por la consulta que hemos realizado
     */
     obtenerInformacionParaPregunta(data){
+      return new Promise((resolve, reject) => {
         //obtenemos el label y el resultado de todas las entidades
         if(data && data.results && data.results.bindings.length > 0){
-            var entidades = data.results.bindings.map(binding => {
-                return {
-                    //obtenemos el label de la "pregunta" (ejemplo country)
-                    label: this.obtenerValorPropiedad(binding, this.labels[1]),
-                    //obtenemos el label de la "respuesta" (ejemplo capital)
-                    result: this.obtenerValorPropiedad(binding, this.labels[2])
-                };
-            });
+          var entidades = data.results.bindings.map(binding => {
+            return {
+                //obtenemos el label de la "pregunta" (ejemplo country)
+                label: this.obtenerValorPropiedad(binding, this.labels[1]),
+                //obtenemos el label de la "respuesta" (ejemplo capital)
+                result: this.obtenerValorPropiedad(binding, this.labels[2])
+            };
+          });
 
-            //obtenemos 4 índices aleatorios únicos
-            var indicesAleatorios = [];
-            while(indicesAleatorios.length < 4){
-                var indiceAleatorio = Math.floor(Math.random() * entidades.length);
-                if(!indicesAleatorios.includes(indiceAleatorio)){
-                    indicesAleatorios.push(indiceAleatorio);
-                }
+          //obtenemos 4 índices aleatorios únicos
+          var indicesAleatorios = [];
+          while(indicesAleatorios.length < 4){
+            var indiceAleatorio = Math.floor(Math.random() * entidades.length);
+            if(!indicesAleatorios.includes(indiceAleatorio)){
+              indicesAleatorios.push(indiceAleatorio);
             }
+          }
 
-            //obtenemos las 4 entidades aleatorias que vamos a utilizar para generar la pregunta
-            this.answers = indicesAleatorios.map(indice => entidades[indice]);
+          //obtenemos las 4 entidades aleatorias que vamos a utilizar para generar la pregunta
+          this.answers = indicesAleatorios.map(indice => entidades[indice]);  
 
-            this.generarTextoPregunta();
+          this.generarTextoPregunta()
+            .then(() => resolve())
+            .catch(error => reject(error));
         } 
+      });
     }    
 
     /*
@@ -138,21 +147,27 @@ class ObtenerPreguntaWikiData {
       generamos la pregunta con la información que hemos obtenido  
     */
     generarTextoPregunta(){
-        const xhr = new XMLHttpRequest();
-        xhr.open('GET', "esqueletoPreguntas.xml", true);
-    
-        xhr.onload = () => {
-          if (xhr.status === 200) {
-            const xmlString = xhr.responseText;
-            const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+      return new Promise((resolve, reject) => {
+        //leemos el archivo 
+        fs.readFile('esqueletoPreguntas.xml', 'utf-8', (err, data) => {
+          if (err) {
+            console.error('Error al leer el esqueleto de las preguntas:', err);
+              return;
+          }
+
+          //parseamos el xml
+          xml2js.parseString(data, (parseErr, result) => {
+            if (parseErr) {
+              console.error('Error al analizar el esqueleto de las preguntas:', parseErr);
+              return;
+            } 
+
+            //obtenemos el esqueleto de la pregunta que queremos hacer
+            var textoPregunta = this.obtenerTextoPregunta(result, this.question, this.type);
             
-            //obtiene todos los esqueletos de las preguntas
-            var textoPregunta = xmlDoc.querySelector('pregunta[question="' + this.question + '"][type="' + this.type +'"]').textContent;
-    
             //comprobamos que el resultado es valido para hacer la pregunta (que no sea QXXXXX)
             var preguntaCorrecta = this.answers.find(entidad => {
-              return !entidad.label.startsWith('Q') && /\d/.test(entidad.label);
+              return entidad.label !== "Ninguna de las anteriores";
             });
 
             if(preguntaCorrecta){
@@ -161,39 +176,60 @@ class ObtenerPreguntaWikiData {
               var respuestaCorrecta = preguntaCorrecta.result;
               var consulta = textoPregunta.replace('{RELLENAR}', pregunta);
 
-              generarPregunta(consulta, respuestaCorrecta);                       
-            } 
+              this.generarPregunta(consulta, respuestaCorrecta)
+                .then(() => resolve())
+                .catch(error => reject(error));                       
+            }           
+          });
+        });
+        });
+    }
+
+    /*
+      obtenemos el texto de la pregunta que queremos hacer
+    */
+    obtenerTextoPregunta(result, question, type) {
+      var preguntas = result.textoPreguntas.pregunta;
+      for (var pregunta of preguntas) {
+          if (pregunta.$.question === question && pregunta.$.type === type) {
+              return pregunta._;
           }
-        };    
-        xhr.send();
+      }
+      return "";
     }
 
     /* 
       generamos un json con la info necesaria de la pregunta para poder guardarla en la base de datos
     */
     generarPregunta(consulta, respuestaCorrecta){
-      var respuestasIncorrectas = [];
-      var num = 0;
-      //añadimos el resto de respuestas
-      for(var i = 0; i < this.answers.length; i++){
-        if(this.answers[i].result !== respuestaCorrecta){
-          respuestasIncorrectas[num] = this.answers[i].label;
-          num++;
+      return new Promise((resolve, reject) => {
+        var respuestasIncorrectas = [];
+        var num = 0;
+        //añadimos el resto de respuestas
+        for(var i = 0; i < this.answers.length; i++){
+          if(this.answers[i].result !== respuestaCorrecta){
+            respuestasIncorrectas[num] = this.answers[i].label;
+            num++;
+          }
         }
-      }
 
-      //guardamos la pregunta para añadirla a la base de datos
-      this.finalQuestion = {
-        question: consulta,
-        correct: respuestaCorrecta,
-        incorrect1: respuestasIncorrectas[0],
-        incorrect2: respuestasIncorrectas[1],
-        incorrect3: respuestasIncorrectas[2]
-      }   
+        //guardamos la pregunta para añadirla a la base de datos
+        this.finalQuestion = {
+          question: consulta.trim().replace(/\r?\n|\r/g, ''),
+          correct: respuestaCorrecta,
+          incorrect1: respuestasIncorrectas[0],
+          incorrect2: respuestasIncorrectas[1],
+          incorrect3: respuestasIncorrectas[2],
+          category: this.category,
+          type: this.type
+        }         
+
+        resolve();
+      });
     }   
 
     obtenerPregunta(){
-      return finalQuestion;
+      return this.finalQuestion;
     }
 }
 
