@@ -42,16 +42,6 @@ app.post('/adduser', async (req, res) => {
   }
 });
 
-app.get('/getQuestion', async (req, res) => {
-  try {
-    // llamamos al servicio de preguntas
-    const questionResponse = await axios.get(questionServiceUrl+'/getQuestion', req.body);
-    res.json(questionResponse.data);
-  } catch (error) {
-    res.status(error.response.status).json({ error: error.response.data.error });
-  }
-});
-
 app.get('/generateQuestions', async (req, res) => {
   try {
     // llamamos al servicio de preguntas
@@ -61,8 +51,6 @@ app.get('/generateQuestions', async (req, res) => {
     res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
-
-
 
 // Start the gateway service
 const server = app.listen(port, () => {

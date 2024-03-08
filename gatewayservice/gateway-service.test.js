@@ -37,4 +37,11 @@ describe('Gateway Service', () => {
     expect(response.statusCode).toBe(200);
     expect(response.body.userId).toBe('mockedUserId');
   });
+
+  //Test /generateQuestions endpoint
+  it('should forward generate questions request to question service', async () => {
+    const response = await request(app).get('/generateQuestions');
+
+    expect(response.statusCode).toBe(200);
+  });
 });
