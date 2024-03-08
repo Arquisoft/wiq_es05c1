@@ -54,16 +54,11 @@ app.get('/getQuestion', async (req, res) => {
 
 app.get('/generateQuestions', async (req, res) => {
   try {
-    console.log("Generando preguntas en el gateway");
     // llamamos al servicio de preguntas
-    const questionResponse = await axios.get(questionServiceUrl+'/generateQuestions', req.body);
+    await axios.get(questionServiceUrl+'/generateQuestions', req.body);
     
   } catch (error) {
-    if (error.response) {
-      res.status(error.response.status).json({ error: error.response.data.error });
-  } else {
-      res.status(500).json({ error: 'Error en la respuesta del servidor' });
-  }
+    res.status(error.response.status).json({ error: error.response.data.error });
   }
 });
 
