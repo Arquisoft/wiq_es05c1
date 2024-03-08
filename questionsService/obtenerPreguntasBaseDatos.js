@@ -7,54 +7,25 @@ const Respuesta = mongoose.model('Respuesta');
 
 class ObtenerPreguntas{
 
-    obtenerPregunta(){    
-        console.log("Obteniendo pregunta");
-        var pregunta;
-        var respuestaCorrecta;
-        var respuestaIncorrecta1;
-        var respuestaIncorrecta2;
-        var respuestaIncorrecta3;
+    async obtenerPregunta(){    
+        var resultado = {};
 
-        Pregunta.aggregate([
-            { $sample: { size: 1 } }
-        ]).then(pregunta => {
-           var pregunta_id = pregunta._id;
-           pregunta = pregunta.textoPregunta;
-            Tipos.findOne({ _id: { $in: pregunta.pregunta_id } }).then(tipo => {
-            console.log(tipo_id);
-            respuestaCorrecta = pregunta.respuestaCorrecta;
-            console.log(respuestaCorrecta);
-            Respuesta.aggregate([
-                { $match: { nombreTipo: tipo._id, texto: { $ne: [respuestaCorrecta, "Ninguna de las anteriores" ]} } },
-                { $sample: { size: 3 } }
-            
-            ]).then(respuestas => {
-                console.log(respuestas);
-                respuestaIncorrecta1 = respuestas[0].textoRespuesta;
-                respuestaIncorrecta2 = respuestas[1].textoRespuesta;
-                respuestaIncorrecta3 = respuestas[2].textoRespuesta;
-            }).catch(err => {
-                console.error(err);
-            });
-            })
-            console.log(pregunta_id);
+        var pregunta = await Pregunta.aggregate([{ $sample: { size: 1 } }]);
 
-        }).catch(err => {
-            console.error(err);
-        });
+        //por ejemplo capital
+        var tipo = await Tipos.findOne({ idPreguntas: { $in: pregunta[0]._id } });
 
-        console.log(pregunta);
-        console.log(respuestaCorrecta);
-        console.log(respuestaIncorrecta1);
-        console.log(respuestaIncorrecta2);
-        console.log(respuestaIncorrecta3);
+        var respuestas = await Respuesta.aggregate([
+            { $match: { tipos: {$in : [tipo._id]}, textoRespuesta: { $ne: [pregunta[0].respuestaCorrecta, "Ninguna de las anteriores" ]} } },
+            { $sample: { size: 3 } }
+        ]);
 
         return resultado = {
             pregunta: pregunta.textoPregunta,
-            correcta: respuestaCorrecta,
-            respuestasIncorrecta1:  respuestaIncorrecta1,
-            respuestasIncorrecta2:  respuestaIncorrecta2,
-            respuestasIncorrecta3:  respuestaIncorrecta3
+            correcta: pregunta.respuestaCorrecta,
+            respuestasIncorrecta1:  respuestas[0].textoRespuesta,
+            respuestasIncorrecta2:  respuestas[1].textoRespuesta,
+            respuestasIncorrecta3:  respuestas[2].textoRespuesta
         };
     }
 }
