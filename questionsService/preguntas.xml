@@ -147,7 +147,6 @@
           ?person wdt:P569 ?fNacimiento .
             SERVICE wikibase:label { bd:serviceParam wikibase:language "es". }
         }
-        
     </query>
    </pregunta>
 </preguntas>
