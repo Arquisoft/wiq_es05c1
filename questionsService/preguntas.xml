@@ -1,18 +1,19 @@
 <preguntas>
 
-    <pregunta question="pais" type="capital" category="geografia">
-        <query >
-           SELECT ?country ?countryLabel ?capitalLabel
-            WHERE
-            {
-            ?country wdt:P31 wd:Q3624078. # Instance of country
-            ?country wdt:P36 ?capital. # Has capital
-            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+    <pregunta question="pais" type="capital"  category="geografia">
+        <query>
+            SELECT DISTINCT ?countryLabel (SAMPLE(?nombreCapital) AS ?capitales)
+            WHERE {
+                ?country wdt:P31 wd:Q3624078.  # Instancia de país
+                ?country wdt:P36 ?capital.  # Tiene capital
+                ?country rdfs:label ?countryLabel filter (lang(?countryLabel) = "es").
+                ?capital rdfs:label ?nombreCapital filter (lang(?nombreCapital) = "es").
             }
-
+            GROUP BY ?countryLabel
         </query>
     </pregunta>
 
+    
     <pregunta question="estado" type="capital"  category="geografia">
         <query >
             SELECT ?state ?stateLabel ?capitalLabel
@@ -37,18 +38,7 @@
            }
         </query>
     </pregunta>
-    <pregunta question="pais" type="capital"  category="geografia">
-        <query>
-            SELECT DISTINCT ?countryLabel (SAMPLE(?nombreCapital) AS ?capitales)
-            WHERE {
-                ?country wdt:P31 wd:Q3624078.  # Instancia de país
-                ?country wdt:P36 ?capital.  # Tiene capital
-                ?country rdfs:label ?countryLabel filter (lang(?countryLabel) = "es").
-                ?capital rdfs:label ?nombreCapital filter (lang(?nombreCapital) = "es").
-            }
-            GROUP BY ?countryLabel
-        </query>
-    </pregunta>
+   
    <pregunta question="libro" type="autor"  category="arte">
     <query>
         SELECT DISTINCT ?nombreLibro (GROUP_CONCAT(DISTINCT ?nombreAuthor; SEPARATOR=", ") AS ?authors)
