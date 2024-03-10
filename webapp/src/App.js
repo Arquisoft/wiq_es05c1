@@ -5,6 +5,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
+import { Box} from "@chakra-ui/react";
+import { QuestionArea } from './components/QuestionArea';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -12,7 +14,18 @@ function App() {
   const handleToggleView = () => {
     setShowLogin(!showLogin);
   };
-
+  //  /**
+  return (
+    <>
+      <Box minH="100vh" minW="100vw" 
+      bgGradient="linear(to-t,#08313A,#107869)"
+      display="flex" justifyContent="center" alignItems="center">
+        <QuestionArea/>
+      </Box>
+    </>
+  );
+  // */
+  /**
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -33,6 +46,7 @@ function App() {
       </Typography>
     </Container>
   );
+  */
 }
 
 export default App;
