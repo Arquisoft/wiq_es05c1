@@ -37,7 +37,7 @@
            }
         </query>
     </pregunta>
-    <pregunta question="estado" type="capital"  category="geografia">
+    <pregunta question="pais" type="capital"  category="geografia">
         <query>
             SELECT DISTINCT ?countryLabel (SAMPLE(?nombreCapital) AS ?capitales)
             WHERE {
@@ -49,5 +49,35 @@
             GROUP BY ?countryLabel
         </query>
     </pregunta>
-   
+   <pregunta question="libro" type="autor"  category="arte">
+    <query>
+        SELECT DISTINCT ?nombreLibro (GROUP_CONCAT(DISTINCT ?nombreAuthor; SEPARATOR=", ") AS ?authors)
+        WHERE {
+            ?book wdt:P31 wd:Q571.  # libro (clase)
+            ?book wdt:P50 ?author.  # Relación "autor"
+            ?book rdfs:label ?nombreLibro filter (lang(?nombreLibro) = "es").
+            ?author rdfs:label ?nombreAuthor filter (lang(?nombreAuthor) = "es").
+        }
+        GROUP BY ?nombreLibro
+    </query>
+   </pregunta>
+
+   <pregunta question="libro" type="genero"  category="arte">
+    <query>
+        SELECT DISTINCT ?nombreLibro (GROUP_CONCAT(DISTINCT ?nombregenero; SEPARATOR=", ") AS ?generos)
+        WHERE {
+            ?book wdt:P31 wd:Q571.  
+            ?book wdt:P136 ?genero.  # Relación "género"
+            ?book rdfs:label ?nombreLibro filter (lang(?nombreLibro) = "es").
+            ?genero rdfs:label ?nombregenero filter (lang(?nombregenero) = "es").
+        }
+        GROUP BY ?nombreLibro
+    </query>
+   </pregunta>
+
+   <pregunta>
+    <query>
+        
+    </query>
+   </pregunta>
 </preguntas>
