@@ -75,6 +75,33 @@
     </query>
    </pregunta>
 
+   <pregunta question="videojuego" type="plataforma"  category="entretenimiento">
+    <query>
+        SELECT DISTINCT ?nombreVideojuego (GROUP_CONCAT(DISTINCT ?nombrePlataforma; SEPARATOR=", ") AS ?plataformas)
+        WHERE {
+            ?videojuego wdt:P31 wd:Q7889.  # Videojuegos (clase)
+            ?videojuego wdt:P123 ?plataforma.  # Relación "plataforma"
+            ?videojuego rdfs:label ?nombreVideojuego filter (lang(?nombreVideojuego) = "es").
+            ?plataforma rdfs:label ?nombrePlataforma filter (lang(?nombrePlataforma) = "es").
+        }
+        GROUP BY ?nombreVideojuego
+    </query>
+   </pregunta>
+
+   <pregunta question="videojuego" type="genero"  category="entretenimiento">
+    <query>
+        # Consulta para obtener los nombres únicos de los videojuegos y sus géneros
+        SELECT DISTINCT ?nombreVideojuego (GROUP_CONCAT(DISTINCT ?nombreGenero; SEPARATOR=", ") AS ?generos)
+        WHERE {
+            ?videojuego wdt:P31 wd:Q7889.  # Videojuegos (clase)
+            ?videojuego wdt:P136 ?genero.  # Relación "género"
+            ?videojuego rdfs:label ?nombreVideojuego filter (lang(?nombreVideojuego) = "es").
+            ?genero rdfs:label ?nombreGenero filter (lang(?nombreGenero) = "es").
+        }
+        GROUP BY ?nombreVideojuego
+    </query>
+   </pregunta>
+
    <pregunta>
     <query>
         
