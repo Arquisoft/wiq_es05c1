@@ -26,7 +26,8 @@ app.get('/getQuestion', async(req,res)=> {
   try{  
     //coger pregunta bd
     console.log("LLegamos al question service")
-    const questions = await question.obtenerPregunta();
+    const questions = question.obtenerPregunta();
+
     //para devolver la pregunta
     res.json(questions);
     
