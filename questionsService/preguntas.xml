@@ -12,11 +12,10 @@
             GROUP BY ?countryLabel
         </query>
     </pregunta>
-
     
     <pregunta question="estado" type="capital"  category="geografia">
         <query >
-            SELECT ?state ?stateLabel ?capitalLabel
+            SELECT ?stateLabel ?state ?capitalLabel
             WHERE {
                 ?state wdt:P31 wd:Q35657 .
                 ?state p:P36 ?statement .
@@ -80,7 +79,6 @@
 
    <pregunta question="videojuego" type="genero"  category="entretenimiento">
     <query>
-        # Consulta para obtener los nombres únicos de los videojuegos y sus géneros
         SELECT DISTINCT ?nombreVideojuego (GROUP_CONCAT(DISTINCT ?nombreGenero; SEPARATOR=", ") AS ?generos)
         WHERE {
             ?videojuego wdt:P31 wd:Q7889.  # Videojuegos (clase)
@@ -104,9 +102,10 @@
         GROUP BY ?clubLabel
     </query>
    </pregunta>
+
    <pregunta question="tenista" type="paisNacimiento"  category="deportes">
     <query>
-        SELECT ?tenistaLabel ?paisNacimientoLabel
+        SELECT ?tenistaLabel ?tenista ?paisNacimientoLabel
         WHERE {
             ?tenista wdt:P106 wd:Q10833314. # Instancia de tenista
             ?tenista wdt:P19 ?paisNacimiento. # País de nacimiento
@@ -117,7 +116,7 @@
    
    <pregunta question="presidenteEspaña" type="fechaNacimiento"  category="historia">
     <query>
-        SELECT DISTINCT ?presidente ?nombreCompleto ?fechaNacimiento
+        SELECT DISTINCT ?nombreCompleto ?presidente ?fechaNacimiento
         WHERE {
             ?presidente wdt:P31 wd:Q5; # Filtrar por personas
               wdt:P39 wd:Q844587; # Filtrar por posición: presidente del Gobierno de España
@@ -128,15 +127,16 @@
         ORDER BY ?nombreCompleto
     </query>
    </pregunta>
+
    <pregunta question="personasOviedo" type="fechaNacimiento"  category="historia">
     <query>
-        # Personalidades Nacidas en oviedo y su fecha de nacimiento 
-        SELECT ?personLabel ?fNacimiento
+        SELECT ?personLabel ?person ?fNacimiento
         WHERE {
             ?person wdt:P19 wd:Q14317.
-          ?person wdt:P569 ?fNacimiento .
+            ?person wdt:P569 ?fNacimiento .
             SERVICE wikibase:label { bd:serviceParam wikibase:language "es". }
         }
     </query>
    </pregunta>
+
 </preguntas>

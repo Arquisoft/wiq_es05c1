@@ -57,11 +57,16 @@ class ObtenerPreguntaWikiData {
           
             // Obtener la consulta
             var query = pregunta.query[0];
+            //obtenemos lo que esta entre el select y el where
             var consultaParte = query.match(/SELECT(.*?)WHERE/s)[1].trim();
-                  
+
+            //obtenemos las labels que necesitamos para la consulta
+            var prueba = consultaParte.match(/\?(\w+)/g);            
             // Dividir la parte de la consulta por los símbolos '?' para obtener las labels 
-            this.labels = consultaParte.split('?').map(part => part.trim()).filter(part => part !== '');
-    
+            this.labels = prueba.map(match => {
+              return match.slice(1); // Elimina el primer carácter "?" y muestra el resto
+            });
+
             //obtenemos todas las entradas de wikidata para esa query
             this.obtenerEntidadesConsulta(query)
               .then(() => resolve())
@@ -106,7 +111,7 @@ class ObtenerPreguntaWikiData {
           var entidades = data.results.bindings.map(binding => {
             return {
                 //obtenemos el label de la "pregunta" (ejemplo country)
-                label: this.obtenerValorPropiedad(binding, this.labels[1]),
+                label: this.obtenerValorPropiedad(binding, this.labels[0]),
                 //obtenemos el label de la "respuesta" (ejemplo capital)
                 result: this.obtenerValorPropiedad(binding, this.labels[2])
             };
@@ -208,7 +213,7 @@ class ObtenerPreguntaWikiData {
         //añadimos el resto de respuestas
         for(var i = 0; i < this.answers.length; i++){
           if(this.answers[i].result !== respuestaCorrecta){
-            respuestasIncorrectas[num] = this.answers[i].label;
+            respuestasIncorrectas[num] = this.answers[i].result;
             num++;
           }
         }
@@ -223,6 +228,8 @@ class ObtenerPreguntaWikiData {
           category: this.category,
           type: this.type
         }         
+
+        console.log(this.finalQuestion);
 
         resolve();
       });
