@@ -124,4 +124,30 @@
         }
     </query>
    </pregunta>
+   
+   <pregunta question="presidenteEspaña" type="fechaNacimiento"  category="historia">
+    <query>
+        SELECT DISTINCT ?presidente ?nombreCompleto ?fechaNacimiento
+        WHERE {
+            ?presidente wdt:P31 wd:Q5; # Filtrar por personas
+              wdt:P39 wd:Q844587; # Filtrar por posición: presidente del Gobierno de España
+              wdt:P569 ?fechaNacimiento; # Obtener fecha de nacimiento (opcional)
+              wdt:P1559 ?nombreCompleto.
+              SERVICE wikibase:label { bd:serviceParam wikibase:language "es". }
+            }
+        ORDER BY ?nombreCompleto
+    </query>
+   </pregunta>
+   <pregunta question="personasOviedo" type="fechaNacimiento"  category="historia">
+    <query>
+        # Personalidades Nacidas en oviedo y su fecha de nacimiento 
+        SELECT ?personLabel ?fNacimiento
+        WHERE {
+            ?person wdt:P19 wd:Q14317.
+          ?person wdt:P569 ?fNacimiento .
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "es". }
+        }
+        
+    </query>
+   </pregunta>
 </preguntas>
