@@ -102,9 +102,27 @@
     </query>
    </pregunta>
 
-   <pregunta>
+   <pregunta question="clubFutbol" type="estadio"  category="deportes">
     <query>
-        
+        SELECT DISTINCT ?clubLabel (GROUP_CONCAT(DISTINCT ?estadioName; SEPARATOR=", ") AS ?estadios)
+        WHERE {
+            ?club wdt:P31 wd:Q476028.  # club (clase)
+            ?club wdt:P115 ?estadio.  # Relación "estadio"
+            ?club rdfs:label ?clubLabel filter (lang(?clubLabel) = "es").
+            ?estadio rdfs:label ?estadioName filter (lang(?estadioName) = "es").
+        }
+        GROUP BY ?clubLabel
+    </query>
+   </pregunta>
+
+   <pregunta question="tenista" type="paisNacimiento"  category="deportes">
+    <query>
+        SELECT ?tenistaLabel ?paisNacimientoLabel
+        WHERE {
+            ?tenista wdt:P106 wd:Q10833314. # Instancia de tenista
+            ?tenista wdt:P19 ?paisNacimiento. # País de nacimiento
+            SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+        }
     </query>
    </pregunta>
 </preguntas>
