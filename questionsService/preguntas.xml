@@ -17,12 +17,37 @@
         <query >
             SELECT ?state ?stateLabel ?capitalLabel
             WHERE {
-            ?state wdt:P31 wd:Q35657 .
-            ?state p:P36 ?statement .
-            ?statement ps:P36 ?capital .
+                ?state wdt:P31 wd:Q35657 .
+                ?state p:P36 ?statement .
+                ?statement ps:P36 ?capital .
+            # Fetching the rank of the property
+            ?statement wikibase:rank ?rank .
             SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],es". }
+            # Subquery to get the highest ranked capital for each state
+            {
+                SELECT ?state (MAX(?rank) AS ?maxRank)
+                WHERE {
+                    ?state wdt:P31 wd:Q35657 .
+                    ?state p:P36 ?statement .
+                    ?statement wikibase:rank ?rank .
+                }
+                GROUP BY ?state
             }
-
+            FILTER (?rank = ?maxRank)
+           }
         </query>
     </pregunta>
+    <pregunta question="estado" type="capital"  category="geografia">
+        <query>
+            SELECT DISTINCT ?countryLabel (SAMPLE(?nombreCapital) AS ?capitales)
+            WHERE {
+                ?country wdt:P31 wd:Q3624078.  # Instancia de país
+                ?country wdt:P36 ?capital.  # Tiene capital
+                ?country rdfs:label ?countryLabel filter (lang(?countryLabel) = "es").
+                ?capital rdfs:label ?nombreCapital filter (lang(?nombreCapital) = "es").
+            }
+            GROUP BY ?countryLabel
+        </query>
+    </pregunta>
+   
 </preguntas>
