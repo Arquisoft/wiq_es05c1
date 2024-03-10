@@ -14,7 +14,7 @@ function App() {
   const handleToggleView = () => {
     setShowLogin(!showLogin);
   };
-  //  /**
+    /**
   return (
     <>
       <Box minH="100vh" minW="100vw" 
@@ -24,8 +24,8 @@ function App() {
       </Box>
     </>
   );
-  // */
-  /**
+   */
+  
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -46,7 +46,7 @@ function App() {
       </Typography>
     </Container>
   );
-  */
+  
 }
 
 export default App;
