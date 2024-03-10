@@ -114,7 +114,6 @@
         GROUP BY ?clubLabel
     </query>
    </pregunta>
-
    <pregunta question="tenista" type="paisNacimiento"  category="deportes">
     <query>
         SELECT ?tenistaLabel ?paisNacimientoLabel
