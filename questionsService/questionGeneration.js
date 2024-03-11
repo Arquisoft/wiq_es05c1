@@ -8,7 +8,11 @@ class GenerarPregunta {
     // Método para ejecutar las operaciones
     async ejecutarOperaciones() {
         await preguntaWiki.leerYSacarConsultas();
-        guardarPregunta.guardarEnBaseDatos(preguntaWiki.obtenerPregunta());
+
+        //si se ha generado pregunta, guardarla en la base de datos
+        if (preguntaWiki.obtenerPregunta() !== undefined) {
+            guardarPregunta.guardarEnBaseDatos(preguntaWiki.obtenerPregunta());            
+        }
     }
 }
 
