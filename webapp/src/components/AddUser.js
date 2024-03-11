@@ -35,7 +35,7 @@ const AddUser = () => {
 
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-      <Typography component="h1" variant="h5">
+      <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
         Create account
       </Typography>
       <TextField
@@ -64,7 +64,7 @@ const AddUser = () => {
         value={repPassword}
         onChange={(e) => setRepPassword(e.target.value)}
       />
-      <Button variant="contained" color="primary" onClick={addUser}>
+      <Button variant="contained" color="primary" onClick={addUser} sx={{ textAlign: 'center' }}>
         Register user
       </Button>
       <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
