@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 
+import PropTypes from 'prop-types'; // Importa PropTypes
+
 const Login = ({ startGame }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -10,10 +12,6 @@ const Login = ({ startGame }) => {
   const [loginSuccess, setLoginSuccess] = useState(false);
   const [createdAt, setCreatedAt] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
-
-  //para mostrar el juego o no
-  const [showQuestionArea, setShowQuestionArea] = useState(false);
-
 
   const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -90,6 +88,11 @@ const Login = ({ startGame }) => {
           )}
         </Container>
     );
+};
+
+// Agrega la validación de props
+Login.propTypes = {
+  startGame: PropTypes.func.isRequired,
 };
 
 export default Login;
