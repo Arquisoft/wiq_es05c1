@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./user-model')
+const User = require('./database/user-model')
 
 const app = express();
 const port = 8001;

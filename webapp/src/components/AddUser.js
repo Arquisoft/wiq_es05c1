@@ -18,7 +18,7 @@ const AddUser = () => {
         setError("Passwords don't match");
         return;
       }
-      await axios.post(`${apiEndpoint}/adduser`, { username, password, repPassword });
+      await axios.post(`${apiEndpoint}/adduser`, { username, password });
       setOpenSnackbar(true);
     } catch (error) {
       setError(error.response.data.error);
