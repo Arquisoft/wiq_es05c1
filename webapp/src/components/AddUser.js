@@ -8,12 +8,17 @@ const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000
 const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [repPassword, setRepPassword] = useState('');
   const [error, setError] = useState('');
   const [openSnackbar, setOpenSnackbar] = useState(false);
 
   const addUser = async () => {
     try {
-      await axios.post(`${apiEndpoint}/adduser`, { username, password });
+      if(password !== repPassword){
+        setError("Passwords don't match");
+        return;
+      }
+      await axios.post(`${apiEndpoint}/adduser`, { username, password, repPassword });
       setOpenSnackbar(true);
     } catch (error) {
       setError(error.response.data.error);
@@ -27,7 +32,7 @@ const AddUser = () => {
   return (
     <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
       <Typography component="h1" variant="h5">
-        Add User
+        Create account
       </Typography>
       <TextField
         name="username"
@@ -46,8 +51,17 @@ const AddUser = () => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
+      <TextField
+        name="repeat password"
+        margin="normal"
+        fullWidth
+        label="Repeat Password"
+        type="password"
+        value={repPassword}
+        onChange={(e) => setRepPassword(e.target.value)}
+      />
       <Button variant="contained" color="primary" onClick={addUser}>
-        Add User
+        Register user
       </Button>
       <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
       {error && (
