@@ -22,6 +22,13 @@ const AddUser = () => {
         setError("Passwords don't match");
         return;
       }
+
+      const response = await axios.get(`${apiEndpoint}/checkuser/${username}`);
+      if (response.data.exists) {
+        setError("Username already exists");
+        return;
+      }
+
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
       setOpenSnackbar(true);
     } catch (error) {
