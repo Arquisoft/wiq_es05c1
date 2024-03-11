@@ -14,6 +14,10 @@ const AddUser = () => {
 
   const addUser = async () => {
     try {
+      if(password.length < 6){
+        setError("Password must have at least 6 characters");
+        return;
+      }
       if(password !== repPassword){
         setError("Passwords don't match");
         return;
