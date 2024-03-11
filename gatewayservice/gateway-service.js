@@ -46,6 +46,7 @@ app.get('/getQuestion', async (req, res) => {
   try {
     // llamamos al servicio de preguntas
     const questionResponse = await axios.get(questionServiceUrl+'/getQuestion', req.body);
+    
     res.json(questionResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });

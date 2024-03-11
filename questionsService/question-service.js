@@ -25,9 +25,7 @@ mongoose.connect(mongoUri);
 app.get('/getQuestion', async(req,res)=> {
   try{  
     //coger pregunta bd
-    console.log("LLegamos al question service")
-    const questions = question.obtenerPregunta();
-
+    const questions = await question.obtenerPregunta();
     //para devolver la pregunta
     res.json(questions);
     
