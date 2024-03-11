@@ -140,9 +140,17 @@ class ObtenerPreguntaWikiData {
       obtenemos el valor que queremos de la entidad
     */
     obtenerValorPropiedad(binding, propertyName) {
-      //si tiene la 
+      //si tiene la propiedad
         if (binding && binding.hasOwnProperty(propertyName)) {
+          //comprobamos si es una fecha
+          if(this.esFormatoISO8601(binding[propertyName].value)){
+            //devolvemos la fecha formateada
+            return this.formatearFecha(binding[propertyName].value);
+          }
+          //si no es una fecha devolvemos el valor
+          else{
             return binding[propertyName].value;
+          }
         } else {
             return "Ninguna de las anteriores"; 
         }
@@ -170,9 +178,11 @@ class ObtenerPreguntaWikiData {
             //obtenemos el esqueleto de la pregunta que queremos hacer
             var textoPregunta = this.obtenerTextoPregunta(result, this.question, this.type);
             
+            //para comprobar si es un Q
+            var regex = /^Q\d+/;
             //comprobamos que el resultado es valido para hacer la pregunta (que no sea QXXXXX)
             var preguntaCorrecta = this.answers.find(entidad => {
-              return entidad.label !== "Ninguna de las anteriores";
+              return entidad.label !== "Ninguna de las anteriores" && !regex.test(entidad.label);
             });
 
             if(preguntaCorrecta){
@@ -184,7 +194,12 @@ class ObtenerPreguntaWikiData {
               this.generarPregunta(consulta, respuestaCorrecta)
                 .then(() => resolve())
                 .catch(error => reject(error));                       
-            }           
+            }
+            
+            //si no hay pregunta resolvemos la promesa
+            else{
+              resolve();
+            }
           });
         });
         });
@@ -229,15 +244,39 @@ class ObtenerPreguntaWikiData {
           type: this.type
         }         
 
-        console.log(this.finalQuestion);
-
         resolve();
       });
     }   
 
+    /*
+      obtenemos la pregunta que hemos generado
+    */
     obtenerPregunta(){
       return this.finalQuestion;
     }
+
+    /*
+      comprobamos si es una fecha en formato ISO 8601
+    */
+    esFormatoISO8601(cadena) {
+      // Expresión regular para el formato ISO 8601
+      var formatoISO8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
+      return formatoISO8601.test(cadena);
+  }
+
+  /*
+    formateamos la fecha a un formato más legible
+  */
+  formatearFecha(fechaISO8601) {
+    var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    var fecha = new Date(fechaISO8601);
+    var dia = fecha.getDate();
+    var mes = meses[fecha.getMonth()];
+    var año = fecha.getFullYear();
+    return dia + " de " + mes + " de " + año;
+  }
+  
+  
 }
 
 module.exports = ObtenerPreguntaWikiData;
