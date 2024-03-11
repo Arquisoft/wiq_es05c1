@@ -20,13 +20,15 @@ class ObtenerPreguntas{
             { $sample: { size: 3 } }
         ]);
 
-        return resultado = {
-            pregunta: pregunta.textoPregunta,
-            correcta: pregunta.respuestaCorrecta,
+        resultado = {
+            pregunta: pregunta[0].textoPregunta,
+            correcta: pregunta[0].respuestaCorrecta,
             respuestasIncorrecta1:  respuestas[0].textoRespuesta,
             respuestasIncorrecta2:  respuestas[1].textoRespuesta,
             respuestasIncorrecta3:  respuestas[2].textoRespuesta
         };
+
+        return resultado;
     }
 }
 

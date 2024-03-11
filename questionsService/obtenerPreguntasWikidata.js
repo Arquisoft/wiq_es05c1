@@ -57,11 +57,16 @@ class ObtenerPreguntaWikiData {
           
             // Obtener la consulta
             var query = pregunta.query[0];
+            //obtenemos lo que esta entre el select y el where
             var consultaParte = query.match(/SELECT(.*?)WHERE/s)[1].trim();
-                  
+
+            //obtenemos las labels que necesitamos para la consulta
+            var prueba = consultaParte.match(/\?(\w+)/g);            
             // Dividir la parte de la consulta por los símbolos '?' para obtener las labels 
-            this.labels = consultaParte.split('?').map(part => part.trim()).filter(part => part !== '');
-    
+            this.labels = prueba.map(match => {
+              return match.slice(1); // Elimina el primer carácter "?" y muestra el resto
+            });
+
             //obtenemos todas las entradas de wikidata para esa query
             this.obtenerEntidadesConsulta(query)
               .then(() => resolve())
@@ -106,7 +111,7 @@ class ObtenerPreguntaWikiData {
           var entidades = data.results.bindings.map(binding => {
             return {
                 //obtenemos el label de la "pregunta" (ejemplo country)
-                label: this.obtenerValorPropiedad(binding, this.labels[1]),
+                label: this.obtenerValorPropiedad(binding, this.labels[0]),
                 //obtenemos el label de la "respuesta" (ejemplo capital)
                 result: this.obtenerValorPropiedad(binding, this.labels[2])
             };
@@ -135,9 +140,17 @@ class ObtenerPreguntaWikiData {
       obtenemos el valor que queremos de la entidad
     */
     obtenerValorPropiedad(binding, propertyName) {
-      //si tiene la 
+      //si tiene la propiedad
         if (binding && binding.hasOwnProperty(propertyName)) {
+          //comprobamos si es una fecha
+          if(this.esFormatoISO8601(binding[propertyName].value)){
+            //devolvemos la fecha formateada
+            return this.formatearFecha(binding[propertyName].value);
+          }
+          //si no es una fecha devolvemos el valor
+          else{
             return binding[propertyName].value;
+          }
         } else {
             return "Ninguna de las anteriores"; 
         }
@@ -165,9 +178,11 @@ class ObtenerPreguntaWikiData {
             //obtenemos el esqueleto de la pregunta que queremos hacer
             var textoPregunta = this.obtenerTextoPregunta(result, this.question, this.type);
             
+            //para comprobar si es un Q
+            var regex = /^Q\d+/;
             //comprobamos que el resultado es valido para hacer la pregunta (que no sea QXXXXX)
             var preguntaCorrecta = this.answers.find(entidad => {
-              return entidad.label !== "Ninguna de las anteriores";
+              return entidad.label !== "Ninguna de las anteriores" && !regex.test(entidad.label);
             });
 
             if(preguntaCorrecta){
@@ -179,7 +194,12 @@ class ObtenerPreguntaWikiData {
               this.generarPregunta(consulta, respuestaCorrecta)
                 .then(() => resolve())
                 .catch(error => reject(error));                       
-            }           
+            }
+            
+            //si no hay pregunta resolvemos la promesa
+            else{
+              resolve();
+            }
           });
         });
         });
@@ -208,7 +228,7 @@ class ObtenerPreguntaWikiData {
         //añadimos el resto de respuestas
         for(var i = 0; i < this.answers.length; i++){
           if(this.answers[i].result !== respuestaCorrecta){
-            respuestasIncorrectas[num] = this.answers[i].label;
+            respuestasIncorrectas[num] = this.answers[i].result;
             num++;
           }
         }
@@ -228,9 +248,35 @@ class ObtenerPreguntaWikiData {
       });
     }   
 
+    /*
+      obtenemos la pregunta que hemos generado
+    */
     obtenerPregunta(){
       return this.finalQuestion;
     }
+
+    /*
+      comprobamos si es una fecha en formato ISO 8601
+    */
+    esFormatoISO8601(cadena) {
+      // Expresión regular para el formato ISO 8601
+      var formatoISO8601 = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}Z$/;
+      return formatoISO8601.test(cadena);
+  }
+
+  /*
+    formateamos la fecha a un formato más legible
+  */
+  formatearFecha(fechaISO8601) {
+    var meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    var fecha = new Date(fechaISO8601);
+    var dia = fecha.getDate();
+    var mes = meses[fecha.getMonth()];
+    var año = fecha.getFullYear();
+    return dia + " de " + mes + " de " + año;
+  }
+  
+  
 }
 
 module.exports = ObtenerPreguntaWikiData;
