@@ -20,13 +20,15 @@ Both the user and auth service share a Mongo database that is accessed with mong
 
 ## Quick start guide
 
+## Team Members
+### David Gonzalez
+
 ### Using docker
 
 The fastest way for launching this sample project is using docker. Just clone the project:
 
 ```sh
-git clone https://github.com/Arquisoft/wiq_es05c.git
-```
+git clone https://github.com/Arquisoft/wiq_es05c.git 
 
 and launch it with docker compose:
 
