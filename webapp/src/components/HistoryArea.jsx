@@ -2,9 +2,9 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, Center, Text } from "@chakra-ui/react";
-import { HistoryUtils } from 'wiq_es05c/users/historyservice/history-utils';
+import { getCorrectAnswers, getFailedAnswers, getTotalGames } from './history-utils.js';
 
-function HistoryArea({ userName }) {
+export function HistoryArea({ userName }) {
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [failedAnswers, setFailedAnswers] = useState(0);
   const [totalGames, setTotalGames] = useState(0);
@@ -50,5 +50,3 @@ function HistoryArea({ userName }) {
     </Center>
   );
 }
-
-export default HistoryArea;

@@ -64,7 +64,7 @@ function App() {
       )}
 
       {showLogin && <Login startGame={startGame} mostrarHistorial={mostrarHistorial} />}
-      {!showLogin && !showGame && <AddUser />}
+      {!showLogin && !showGame && !showHistory && <AddUser />}
       {showGame && (
         <ChakraProvider>
           <Game />

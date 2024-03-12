@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Box} from "@chakra-ui/react";
 import { HistoryArea } from './HistoryArea';
 
-function History(userName) {
+function History({userName}) {
   return (
     <>
       <Box minH="100vh" minW="100vw" 
