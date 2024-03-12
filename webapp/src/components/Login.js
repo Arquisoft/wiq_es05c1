@@ -86,6 +86,9 @@ const Login = ({ startGame }) => {
               {error && (
                 <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
               )}
+              <Button variant="contained" color="primary" onClick={handleButtonClick}>
+                Empieza el juego
+              </Button>
             </div>
           )}
         </Container>
