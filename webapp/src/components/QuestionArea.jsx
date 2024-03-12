@@ -13,7 +13,7 @@ export function QuestionArea(){
   const [respuestas, setRespuestas] = useState([]);
   // Estado que almacena la correcta
   const [correcta, setCorrecta] = useState();
-/**
+
     // Función para llamar al servicio y obtener los datos de la pregunta
   const fetchQuestionData = async () => {
       try {          
@@ -21,7 +21,8 @@ export function QuestionArea(){
           const response = await axios.get(`${apiEndpoint}/getQuestion`);
           const data = response.data;
           setQuestionData(data); // Actualizar el estado con los datos de la pregunta obtenidos del servicio
-
+          //Meto la correcta
+          setCorrecta(data.correcta);
           //calcular respuestas 
           const respuestasArray = [data.correcta, data.respuestasIncorrecta1, data.respuestasIncorrecta2, data.respuestasIncorrecta3];
           setRespuestas(respuestasArray);
@@ -35,8 +36,8 @@ export function QuestionArea(){
       useEffect(() => {
         fetchQuestionData();
     }, []); // El array vacío asegura que esto solo se ejecute una vez al montar el componente
-*/
 
+/** PARA DEPURACIÓN Y LOCAL
 useEffect(() => {
   const dataDev = {
     "pregunta": "What is the capital of France?",
@@ -56,9 +57,7 @@ useEffect(() => {
   setRespuestas(respuestasDev);
   setCorrecta(correctaDev);
 }, []);
-
-    //const respuestas = [questionJson.correcta,questionJson.respuestasIncorrecta1,questionJson.respuestasIncorrecta2,questionJson.respuestasIncorrecta3];
-
+*/
 
     return(
         <Box alignContent="center" bg="#0000004d" display="flex" flexDir="column"
