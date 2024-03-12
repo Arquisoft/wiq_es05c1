@@ -10,17 +10,17 @@ function HistoryArea({ userName }) {
   const [totalGames, setTotalGames] = useState(0);
 
   useEffect(() => {
-    const historyUtils = new HistoryUtils('http://localhost:8004/historydb/history');
+    const baseUrl = 'http://localhost:8004/historydb/history';
 
     const fetchHistoryData = async () => {
       try {
-        const correctAnswers = await historyUtils.getCorrectAnswers(userName);
+        const correctAnswers = await getCorrectAnswers(baseUrl, userName);
         setCorrectAnswers(correctAnswers);
 
-        const failedAnswers = await historyUtils.getFailedAnswers(userName);
+        const failedAnswers = await getFailedAnswers(baseUrl, userName);
         setFailedAnswers(failedAnswers);
 
-        const totalGames = await historyUtils.getTotalGames(userName);
+        const totalGames = await getTotalGames(baseUrl, userName);
         setTotalGames(totalGames);
       } catch (error) {
         console.error('Error fetching history data:', error);
