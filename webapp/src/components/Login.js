@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
 
-const Login = ({ startGame }) => {
+const Login = ({ startGame, mostrarHistorial}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -42,6 +42,10 @@ const Login = ({ startGame }) => {
     startGame();
   };
 
+  const verHistorial = () => {
+    mostrarHistorial(username);
+  }
+
 
   return (
         <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
@@ -56,6 +60,10 @@ const Login = ({ startGame }) => {
               
               <Button variant="contained" color="primary" onClick={handleButtonClick}>
                 Empieza el juego
+              </Button>
+
+              <Button variant="contained" color="primary" onClick={verHistorial}>
+                Ver historial
               </Button>
 
             </div>

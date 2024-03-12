@@ -8,6 +8,7 @@ import Link from '@mui/material/Link';
 
 
 import Game from './components/Game';
+import History from './components/History';
 import { ChakraProvider } from '@chakra-ui/react';
 
 
@@ -15,6 +16,8 @@ function App() {
   const [showLogin, setShowLogin] = useState(true);
   const [showGame, setShowGame] = useState(false); // Nuevo estado para controlar si se muestra el juego
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(true); // Estado para controlar la visibilidad del mensaje de bienvenida y los enlaces
+  const [showHistory, setShowHistory] = useState(false); // Estado para controlar el visionado del historial
+  const [userName, setUserName] = useState(''); //Tratar con el nombre de usuario
 
 
   const handleToggleView = () => {
@@ -27,7 +30,17 @@ function App() {
     setShowLogin(false);
     setShowGame(true);
     setShowWelcomeMessage(false);
+    setShowHistory(false);
   };
+
+  // Función para mostrar el historial
+  const mostrarHistorial = (username) => {
+    setShowLogin(false);
+    setShowGame(false);
+    setShowWelcomeMessage(false);
+    setShowHistory(true);
+    setUserName(username);
+  }
  
   return (
     <Container component="main" maxWidth="xs" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -50,11 +63,16 @@ function App() {
         </Typography>
       )}
 
-      {showLogin && <Login startGame={startGame} />}
+      {showLogin && <Login startGame={startGame} mostrarHistorial={mostrarHistorial} />}
       {!showLogin && !showGame && <AddUser />}
       {showGame && (
         <ChakraProvider>
           <Game />
+        </ChakraProvider>
+      )}
+      {showHistory && (
+        <ChakraProvider>
+          <History userName={userName}/>
         </ChakraProvider>
       )}
     </Container>
