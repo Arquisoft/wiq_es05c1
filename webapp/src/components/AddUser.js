@@ -1,7 +1,7 @@
 // src/components/AddUser.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Container, Typography, TextField, Button, Snackbar } from '@mui/material';
+import { Box, Text, Input, Button, FormControl, FormLabel, Alert } from '@chakra-ui/react';
 
 const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
@@ -23,16 +23,14 @@ const AddUser = () => {
         return;
       }
 
-      const response = await axios.get(`${apiEndpoint}/checkuser/${username}`);
-      if (response.data.exists) {
-        setError("Username already exists");
-        return;
-      }
-
       await axios.post(`${apiEndpoint}/adduser`, { username, password });
       setOpenSnackbar(true);
     } catch (error) {
-      setError(error.response.data.error);
+      if (error.response && error.response.data && error.response.data.error) {
+          setError(error.response.data.error);
+      } else {
+          setError("An unexpected error occurred");
+      }
     }
   };
 
@@ -41,44 +39,50 @@ const AddUser = () => {
   };
 
   return (
-    <Container component="main" maxWidth="xs" sx={{ marginTop: 4 }}>
-      <Typography component="h1" variant="h5" sx={{ textAlign: 'center' }}>
+    <Box minH="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={10} bgGradient="linear(to-t, #08313A, #107869)">
+      <Text as="h1" variant="h5" textAlign ="center" marginBottom={4}>
         Create account
-      </Typography>
-      <TextField
-        name="username"
-        margin="normal"
-        fullWidth
-        label="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <TextField
-        name="password"
-        margin="normal"
-        fullWidth
-        label="Password"
-        type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <TextField
-        name="repeat password"
-        margin="normal"
-        fullWidth
-        label="Repeat Password"
-        type="password"
-        value={repPassword}
-        onChange={(e) => setRepPassword(e.target.value)}
-      />
-      <Button variant="contained" color="primary" onClick={addUser} sx={{ textAlign: 'center' }}>
+      </Text>
+      <FormControl>
+        <FormLabel>Username</FormLabel>
+        <Input
+          name="username"
+          margin="normal"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
+        <FormLabel>Password</FormLabel>
+        <Input
+          name="password"
+          margin="normal"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <FormLabel>Repeat Password</FormLabel>
+        <Input
+          name="repeat password"
+          margin="normal"
+          type="password"
+          value={repPassword}
+          onChange={(e) => setRepPassword(e.target.value)}
+        />
+      </FormControl>
+      <Button variant="contained" colorScheme="blue" onClick={addUser} textAlign="center">
         Register user
       </Button>
-      <Snackbar open={openSnackbar} autoHideDuration={6000} onClose={handleCloseSnackbar} message="User added successfully" />
-      {error && (
-        <Snackbar open={!!error} autoHideDuration={6000} onClose={() => setError('')} message={`Error: ${error}`} />
+      {openSnackbar && (
+        <Alert status="success" marginTop={2} onClose={handleCloseSnackbar}>
+          User added successfully
+        </Alert>
       )}
-    </Container>
+      {/* Alerta para errores */}
+      {error && (
+        <Alert status="error" marginTop={2} onClose={() => setError('')}>
+          Error: {error}
+        </Alert>
+      )}
+    </Box>
   );
 };
 

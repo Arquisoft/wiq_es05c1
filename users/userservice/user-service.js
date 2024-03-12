@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
-const User = require('./database/user-model')
+const User = require('./user-model')
 
 const app = express();
 const port = 8001;
@@ -34,29 +34,21 @@ app.post('/adduser', async (req, res) => {
         // Encrypt the password before saving it
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
 
-        const newUser = new User({
+        const user = await User.findOne({ username });
+        if (user) {
+          res.status(401).json({ error: error.message }); 
+        }else{
+          const newUser = new User({
             username: req.body.username,
             password: hashedPassword,
-        });
+          });
 
-        await newUser.save();
-        res.json(newUser);
+          await newUser.save();
+          res.json(newUser);
+        }
     } catch (error) {
         res.status(400).json({ error: error.message }); 
     }});
-
-app.get('/checkuser/:username', async (req, res) => {
-    try{
-      const existUser = await User.findOne({ username: req.params.username });
-      if(existUser){
-        return res.json({ exists: true });
-      }else{
-        return res.json({ exists: false });
-      }
-    } catch (error) {
-        res.status(400).json({ error: error.message }); 
-    }
-});
 
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);
