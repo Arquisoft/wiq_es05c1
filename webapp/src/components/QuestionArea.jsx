@@ -11,7 +11,9 @@ export function QuestionArea(){
   const [questionJson, setQuestionData] = useState(null);
     // Estado para almacenar las respuestas
   const [respuestas, setRespuestas] = useState([]);
-
+  // Estado que almacena la correcta
+  const [correcta, setCorrecta] = useState();
+/**
     // Función para llamar al servicio y obtener los datos de la pregunta
   const fetchQuestionData = async () => {
       try {          
@@ -33,16 +35,27 @@ export function QuestionArea(){
       useEffect(() => {
         fetchQuestionData();
     }, []); // El array vacío asegura que esto solo se ejecute una vez al montar el componente
+*/
 
-    /*
-    const questionJson = {
-      "pregunta": "What is the capital of France?",
-      "correcta": "Paris",
-      "respuestasIncorrecta1": "London",
-      "respuestasIncorrecta2": "Berlin",
-      "respuestasIncorrecta3": "Madrid"
-    }
-    */
+useEffect(() => {
+  const dataDev = {
+    "pregunta": "What is the capital of France?",
+    "correcta": "Paris",
+    "respuestasIncorrecta1": "London",
+    "respuestasIncorrecta2": "Berlin",
+    "respuestasIncorrecta3": "Madrid"
+  };
+
+  // Simulación de la obtención de datos de pregunta
+  const enunciadoDev = dataDev;
+  const respuestasDev = [dataDev.correcta, dataDev.respuestasIncorrecta1, dataDev.respuestasIncorrecta2, dataDev.respuestasIncorrecta3];
+  const correctaDev = dataDev.correcta;
+
+  // Establecer los datos de pregunta y respuestas
+  setQuestionData(enunciadoDev);
+  setRespuestas(respuestasDev);
+  setCorrecta(correctaDev);
+}, []);
 
     //const respuestas = [questionJson.correcta,questionJson.respuestasIncorrecta1,questionJson.respuestasIncorrecta2,questionJson.respuestasIncorrecta3];
 
@@ -53,7 +66,8 @@ export function QuestionArea(){
           {questionJson ? ( // Verificar si se han obtenido los datos de la pregunta
                 <>
                     <EnunciadoBlock pregunta={questionJson.pregunta}/> {/* Renderizar el enunciado de la pregunta */}
-                    <AnswersBlock respuestas={respuestas}/> {/* Renderizar las respuestas de la pregunta */}
+                    <AnswersBlock correcta={correcta} respuestas={respuestas}/> {/* Renderizar las respuestas de la pregunta */}
+                    <p>Hola</p>
                 </>
             ) : (
               <>
