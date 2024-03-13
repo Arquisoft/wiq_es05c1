@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert } from '@chakra-ui/react';
 import { QuestionArea } from './QuestionArea';
 
-const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
 
 const AddUser = () => {
   const [username, setUsername] = useState('');
