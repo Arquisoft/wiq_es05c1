@@ -16,12 +16,19 @@ This repo is a basic application composed of several components.
 Both the user and auth service share a Mongo database that is accessed with mongoose.
 
 ## Members of the group
-  Adrián Santamarina
+
+  Sonia Moro Lauda
+
+  Lucía Villanueva Rodríguez
+
+  Pedro Castro Montes
+  
+  Adrián Santamarina Romero
+
+  David González González
 
 ## Quick start guide
 
-## Team Members
-### David Gonzalez
 
 ### Using docker
 
