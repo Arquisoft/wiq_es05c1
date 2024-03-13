@@ -6,13 +6,7 @@ ifndef::imagesdir[:imagesdir: ../images]
 
 
 === Domain concepts
-User Model
-   - First Name
-   - Password
-
-Question&Answer Model 
-   - Questions 
-   - Answers
+Visit https://github.com/Arquisoft/wiq_es05c/wiki/Domain-Model to consult our Domain model.
 
 
 === User Experience
