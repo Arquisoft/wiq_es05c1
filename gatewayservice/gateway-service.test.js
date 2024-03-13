@@ -26,6 +26,17 @@ it('should perform the health request', async () => {
   expect(response.statusCode).toBe(200);
 });
 
+it('should perform the getQuestion request', async () => {
+  const response = await request(app).get('/getQuestion').send();
+
+  expect(response.statusCode).toBe(200);
+  const data = {
+    pregunta: '¿Cuál es la capital de Francia?',
+    respuestas: ['Berlin', 'Paris', 'Londres', 'Madrid'],
+    correcta: 'Helsinki',
+  };
+  axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
+});
 
   // Test /login endpoint
   it('should forward login request to auth service', async () => {
@@ -38,24 +49,6 @@ it('should perform the health request', async () => {
   });
 
   
-  it('should handle authentication error', async () => {
-    const authError = new Error('Authentication failed');
-    authError.response = {
-      status: 401,
-      data: { error: 'Invalid credentials' },
-    };
-  
-    // Simula un error en la llamada al servicio de autenticación
-    axios.post.mockImplementationOnce(() => Promise.reject(authError));
-  
-    // Realiza la solicitud al endpoint
-    const response = await request(app).post('/login').send({ /* datos de autenticación */ });
-  
-    // Verifica que la respuesta tenga un código de estado 401
-    expect(response.statusCode).toBe(401);
-    expect(response.body.error).toBe('Invalid credentials');
-  });
-  
 
   // Test /adduser endpoint
   it('should forward add user request to user service', async () => {
@@ -67,23 +60,7 @@ it('should perform the health request', async () => {
     expect(response.body.userId).toBe('mockedUserId');
   });
 
-  it('should handle authentication error', async () => {
-    const authError = new Error('Authentication failed');
-    authError.response = {
-      status: 401,
-      data: { error: 'Invalid credentials' },
-    };
   
-    // Simula un error en la llamada al servicio de autenticación
-    axios.post.mockImplementationOnce(() => Promise.reject(authError));
-  
-    // Realiza la solicitud al endpoint
-    const response = await request(app).post('/adduser').send({ /* datos de autenticación */ });
-  
-    // Verifica que la respuesta tenga un código de estado 401
-    expect(response.statusCode).toBe(401);
-    expect(response.body.error).toBe('Invalid credentials');
-  });
 
   //CAso de prueba para un endpoint inexistente
 
@@ -96,6 +73,20 @@ it('should perform the health request', async () => {
   });
   
 
+  // Test /getQuestion endpoint
+  axios.get.mockImplementation((url, data) => {
+    if (url.endsWith("/getQuestion")) {
+      return Promise.resolve({
+        data: [
+          {
+            pregunta: "¿Cuál es la capital de España?",
+            respuestas: ["Madrid", "Paris", "Londres", "Berlin"],
+            correcta: "Madrid"
+          }
+        ],
+      });
+    }
+  });
 
   //Verifica si el manejo de errores funciona correctamente cuando la llamada al servicio de preguntas falla.
   it('should handle error when fetching question', async () => {
@@ -104,29 +95,26 @@ it('should perform the health request', async () => {
     axios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)));
       });
 
-      it('should perform the getQuestion request', async () => {
-        const response = await request(app).get('/getQuestion').send();
-      
-        expect(response.statusCode).toBe(500);
-        const data = {
-          pregunta: '¿Cuál es la capital de Francia?',
-          respuestas: ['Berlin', 'Paris', 'Londres', 'Madrid'],
-          correcta: 'Helsinki',
-        };
-        axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
-      });
+  it('should forward get question request to question service', async () => {
+    const questionServiceUrl = 'http://localhost:8003'; 
+    const expectedQuestion = '¿Cuál es la capital de Francia?';
+    const expectedOptions = ['Berlin', 'Paris', 'Londres', 'Madrid'];
+    const expectedCorrectAnswer = 'Helsinki';
 
-      it('should forward get question request to question generate service', async () => {
-        const questionServiceUrl = 'http://localhost:8003/getQuestion'; 
-        const data = {
-          pregunta: '¿Cuál es la capital de Francia?',
-          respuestas: ['Berlin', 'Paris', 'Londres', 'Madrid'],
-          correcta: 'Helsinki',
-        };
-        axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
-     
-      });
-  
+  // Simula una llamada exitosa al servicio de preguntas
+    axios.get.mockImplementationOnce(() => Promise.resolve({ data }));
+
+  // Realiza la solicitud al endpoint
+    const response = await request(app).get('/getQuestion').send();
+
+  // Verifica que la respuesta tenga un código de estado 200
+    expect(response.statusCode).toBe(200);
+
+  // Verifica que la pregunta y las opciones sean correctas
+    expect(response.body.pregunta).toBe(expectedQuestion);
+    expect(response.body.respuestas).toEqual(expect.arrayContaining(expectedOptions));
+    expect(response.body.correcta).toBe(expectedCorrectAnswer);
+  });
 
   it('should forward get question request to question generate service', async () => {
     const questionServiceUrl = 'http://localhost:8003/generateQuestions'; 
@@ -147,34 +135,68 @@ it('should perform the health request', async () => {
     });
 
   
-    it('should return a 500 error when the question service is not available', async () => {
-      // Mock the axios.get method to always reject with an error
-      axios.get = jest.fn().mockRejectedValue(new Error('Question service is not available'));
-  
-      // Send a request to the /getQuestion endpoint
-      const response = await request(app)
-        .get('/getQuestion')
-        .send({ /* some data */ });
-  
-      // Assert that the response has a 500 status code and a error message
-      expect(response.status).toBe(500);
-      expect(response.body).toEqual({ error: 'Error al realizar la solicitud al servicio de preguntas' });
+    it('should handle authentication error', async () => {
+      const authError = new Error('Authentication failed');
+      authError.response = {
+        status: 401,
+        data: { error: 'Invalid credentials' },
+      };
+    
+      // Simula un error en la llamada al servicio de autenticación
+      axios.post.mockImplementationOnce(() => Promise.reject(authError));
+    
+      // Realiza la solicitud al endpoint
+      const response = await request(app).post('/login').send({ /* datos de autenticación */ });
+    
+      // Verifica que la respuesta tenga un código de estado 401
+      expect(response.statusCode).toBe(401);
+      expect(response.body.error).toBe('Invalid credentials');
     });
+    
+      
+        it('should handle authentication error', async () => {
+          const authError = new Error('Authentication failed');
+          authError.response = {
+            status: 401,
+            data: { error: 'Invalid credentials' },
+          };
+        
+          // Simula un error en la llamada al servicio de autenticación
+          axios.post.mockImplementationOnce(() => Promise.reject(authError));
+        
+          // Realiza la solicitud al endpoint
+          const response = await request(app).post('/adduser').send({ /* datos de autenticación */ });
+        
+          // Verifica que la respuesta tenga un código de estado 401
+          expect(response.statusCode).toBe(401);
+          expect(response.body.error).toBe('Invalid credentials');
+        });
 
-   it('should return an error when generating questions fails', async () => {
-      // Mock the axios.get method to reject the promise
-      axios.get.mockImplementationOnce(() =>
-      Promise.reject(new Error('Error al realizar la solicitud al servicio de preguntas'))
-    );
-  
-    const response = await request(app)
-      .get('/generateQuestions')
-      .send({ id: 'mockedQuestionId' });
-  
-    expect(response.statusCode).toBe(500);
-    expect(response.body.error).toBeDefined();
-    expect(response.body.error).toEqual('Error al realizar la solicitud al servicio de generacion de preguntas');
-  });
+        it('should return an error when the question service request fails', async () => {
+          // Mock the axios.get method to reject the promise
+          axios.get.mockImplementationOnce(() =>
+            Promise.reject(new Error('Error al realizar la solicitud al servicio de preguntas'))
+          );
+        
+          const response = await request(app)
+            .get('/getQuestion')
+            .send({ id: 'mockedQuestionId' });
+        
+          expect(response.statusCode).toBe(500);
+          expect(response.body.error).toBeDefined();
+          expect(response.body.error).toEqual('Error al realizar la solicitud al servicio de preguntas');
+        });
+
+        it('should return an error when generating questions fails', async () => {
+          const errorMessage = 'Error al realizar la solicitud al servicio de generacion de preguntas';
+          axios.get.mockRejectedValue(new Error(errorMessage));
+        
+          const response = await request(app).get('/generateQuestions');
+        
+          expect(response.statusCode).toBe(500);
+          expect(response.body.error).toBeDefined();
+          expect(response.body.error).toEqual(errorMessage);
+        });
 
 
    
