@@ -6,7 +6,7 @@ import { EnunciadoBlock } from './EnunciadoBlock.jsx';
 
 export function QuestionArea(){
 
-  const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
+  const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
     // Estado para almacenar los datos de la pregunta
   const [questionJson, setQuestionData] = useState(null);
     // Estado para almacenar las respuestas
