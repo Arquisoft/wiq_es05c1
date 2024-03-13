@@ -4,17 +4,15 @@ ifndef::imagesdir[:imagesdir: ../images]
 == Cross-cutting Concepts
 
 
-[role="arc42help"]
-
-
 
 === Domain concepts
 User Model
-   - ID (Primary Key)
    - First Name
-   - Last Name
-   - Email
    - Password
+
+Question&Answer Model 
+   - Questions 
+   - Answers
 
 
 === User Experience
@@ -38,12 +36,4 @@ In development...
 
 === Development concepts
 
-    * Build, Test, Deploy
-    * Code generation
-    * Migration
-    * Configurability
-
-
-=== Operation concepts
-    In development...
-
+    * Test: Realizadas pruebas de testing del microservicio gateway-service y del componente de webapp Game,
