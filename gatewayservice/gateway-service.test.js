@@ -187,6 +187,16 @@ it('should perform the getQuestion request', async () => {
           expect(response.body.error).toEqual('Error al realizar la solicitud al servicio de preguntas');
         });
 
+        it('should return an error when generating questions fails', async () => {
+          const errorMessage = 'Error al realizar la solicitud al servicio de preguntas';
+          axios.get.mockRejectedValue(new Error(errorMessage));
+        
+          const response = await request(app).get('/generateQuestions');
+        
+          expect(response.statusCode).toBe(500);
+          expect(response.body.error).toBeDefined();
+          expect(response.body.error).toEqual(errorMessage);
+        });
 //Los siguientes dos test no pasan porq exceden el tiempo de espera.
 /** 
     it('should handle error from GenerarPregunta', async () => {
