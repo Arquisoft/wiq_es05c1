@@ -152,12 +152,6 @@ it('should perform the getQuestion request', async () => {
       expect(response.statusCode).toBe(401);
       expect(response.body.error).toBe('Invalid credentials');
     });
-
-    it('should handle error when add user', async () => {
-      const questionServiceUrl = 'http://localhost:8003/generateQuestions';
-      const errorMessage = 'Network Error';
-      axios.get.mockImplementationOnce(() => Promise.reject(new Error(errorMessage)));
-        });
     
       
         it('should handle authentication error', async () => {
@@ -177,6 +171,22 @@ it('should perform the getQuestion request', async () => {
           expect(response.statusCode).toBe(401);
           expect(response.body.error).toBe('Invalid credentials');
         });
+
+        it('should return an error when the question service request fails', async () => {
+          // Mock the axios.get method to reject the promise
+          axios.get.mockImplementationOnce(() =>
+            Promise.reject(new Error('Error al realizar la solicitud al servicio de preguntas'))
+          );
+        
+          const response = await request(app)
+            .get('/getQuestion')
+            .send({ id: 'mockedQuestionId' });
+        
+          expect(response.statusCode).toBe(500);
+          expect(response.body.error).toBeDefined();
+          expect(response.body.error).toEqual('Error al realizar la solicitud al servicio de preguntas');
+        });
+
 //Los siguientes dos test no pasan porq exceden el tiempo de espera.
 /** 
     it('should handle error from GenerarPregunta', async () => {
