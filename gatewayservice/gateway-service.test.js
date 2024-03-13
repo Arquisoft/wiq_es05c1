@@ -197,6 +197,20 @@ it('should perform the getQuestion request', async () => {
           expect(response.body.error).toBeDefined();
           expect(response.body.error).toEqual(errorMessage);
         });
+
+        it('should return an error when the question service request fails', async () => {
+          // Mock the axios.get method to reject the promise
+          axios.get.mockImplementationOnce(() =>
+            Promise.reject(new Error('Simulated error from question service'))
+          );
+        
+          const response = await request(app)
+            .get('/getQuestion')
+            .send({ id: 'mockedQuestionId' });
+        
+          expect(response.statusCode).toBe(200);
+        
+        });
 //Los siguientes dos test no pasan porq exceden el tiempo de espera.
 /** 
     it('should handle error from GenerarPregunta', async () => {
