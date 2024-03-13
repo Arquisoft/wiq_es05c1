@@ -40,9 +40,9 @@ const AddUser = () => {
   };
 
   return (
-    <Center h="100vh" bgGradient="linear(to-t, #08313A, #107869)">
-      <Box p="6" maxW="md" display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={10}>
-          <Text as="h1" textAlign ="center" marginBottom={4}>
+    <Center h="100vh" w="100vw" bgGradient="linear(to-t, #08313A, #107869)">
+      <Box p="100" w="100%" h="35%" maxW="md" display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={14} bg="white">
+          <Text fontSize="xl" mb="4" as="h1" textAlign ="center" >
             Create account
           </Text>
           <FormControl>

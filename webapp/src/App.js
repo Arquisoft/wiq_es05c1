@@ -15,6 +15,7 @@ function App() {
   const [showLogin, setShowLogin] = useState(true);
   const [showGame, setShowGame] = useState(false); // Nuevo estado para controlar si se muestra el juego
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(true); // Estado para controlar la visibilidad del mensaje de bienvenida y los enlaces
+  const [showAddUser, setShowAddUser] = useState(false);
 
 
   const handleToggleView = () => {
@@ -27,6 +28,7 @@ function App() {
     setShowLogin(false);
     setShowGame(true);
     setShowWelcomeMessage(false);
+    setShowAddUser(false);
   };
  
   return (
@@ -51,7 +53,11 @@ function App() {
       )}
 
       {showLogin && <Login startGame={startGame} />}
-      {!showLogin && !showGame && <AddUser />}
+      {!showLogin && !showGame && (
+          <ChakraProvider>
+            <AddUser />
+          </ChakraProvider>
+      )}
       {showGame && (
         <ChakraProvider>
           <Game />
