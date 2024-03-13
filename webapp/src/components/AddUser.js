@@ -42,7 +42,7 @@ const AddUser = () => {
   return (
     <Center h="100vh" w="100vw" bgGradient="linear(to-t, #08313A, #107869)">
       <Box p="100" w="100%" h="35%" maxW="md" display="flex" flexDirection="column" justifyContent="center" alignItems="center" gap={14} bg="white">
-          <Text fontSize="xl" mb="4" as="h1" textAlign ="center" >
+          <Text as="b" fontSize="3xl" mb="4">
             Create account
           </Text>
           <FormControl>
@@ -70,7 +70,8 @@ const AddUser = () => {
               onChange={(e) => setRepPassword(e.target.value)}
             />
           </FormControl>
-          <Button variant="contained" colorScheme="blue" onClick={addUser} textAlign="center">
+          <Button variant="solid" onClick={addUser} textAlign="center" 
+                color="white" bgGradient="linear(to-t, #08313A, #107869)" size="lg">
             Register user
           </Button>
           {openSnackbar && (
