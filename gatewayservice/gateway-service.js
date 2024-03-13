@@ -49,12 +49,12 @@ app.get('/getQuestion', async (req, res) => {
     
     res.json(questionResponse.data);
   } catch (error) {
-    if (error.response) {
+   /*  if (error.response) {
       const errorMessage= error.response.data.error || error.response.data;
       res.status(error.response.status).json({ error: errorMessage });
-    } else {
+    } else { */
       res.status(500).json({ error: 'Error al realizar la solicitud al servicio de preguntas' });
-    }
+    //}
   }
 });
 
