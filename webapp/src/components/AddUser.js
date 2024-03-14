@@ -72,7 +72,7 @@ const AddUser = () => {
           </FormControl>
           <Button variant="solid" onClick={addUser} textAlign="center" 
                 color="white" bgGradient="linear(to-t, #08313A, #107869)" size="lg">
-            Register user
+            Add user
           </Button>
           {openSnackbar && (
             <Alert status="success" marginTop={2} onClose={handleCloseSnackbar}>
