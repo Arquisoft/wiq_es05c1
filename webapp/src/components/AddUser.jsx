@@ -1,12 +1,12 @@
 // src/components/AddUser.js
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert } from '@chakra-ui/react';
+import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert, Link } from '@chakra-ui/react';
 import { QuestionArea } from './QuestionArea';
 
 const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
 
-const AddUser = () => {
+const AddUser = ({showLoginForm}) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repPassword, setRepPassword] = useState('');
@@ -41,7 +41,7 @@ const AddUser = () => {
 
   return (
     <Center h="100vh" w="100vw" bgGradient="linear(to-t, #08313A, #107869)">
-      <Box p="6" w="100%" maxW="md" bg="white" rounded="md" boxShadow="md" display="flex" flexDirection="column" alignItems="center" gap={5}>
+      <Box p="6" w="100%" maxW="md" bg="white" rounded="md" boxShadow="md">
         <Text as="h1" fontSize="3xl" fontWeight="bold" mb="4" textAlign="center" color="#107869">
           Create Account
         </Text>
@@ -78,6 +78,22 @@ const AddUser = () => {
         >
           Add User
         </Button>
+        <Link
+          name="gotologin"
+          component="button"
+          variant="body2"
+          onClick={showLoginForm}
+          sx={{
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            color: 'blue',
+            '&:hover': {
+              color: 'darkblue',
+            },
+          }}
+        >
+          Already have an account? Login here.
+        </Link>
         {openSnackbar && (
           <Alert status="success" mt="4" borderRadius="md" onClose={handleCloseSnackbar}>
             User added successfully

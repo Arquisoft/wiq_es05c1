@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert } from '@chakra-ui/react';
+import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert, Link } from '@chakra-ui/react';
 import PropTypes from 'prop-types';
 
 const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
 
-const Login = ({ startGame }) => {
+const Login = ({ startGame, showAddUserForm  }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -83,6 +83,23 @@ const Login = ({ startGame }) => {
         >
           Start the game
         </Button>
+        <Link
+          name="gotoregister"
+          component="button"
+          variant="body2"
+          onClick={showAddUserForm}
+          sx={{
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            color: 'blue',
+            '&:hover': {
+              color: 'darkblue',
+            },
+          }}
+        >
+          Don't have an account? Register here.
+        </Link>
+
       </Box>
     </Center>
   );

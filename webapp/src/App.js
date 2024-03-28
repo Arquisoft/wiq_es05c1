@@ -17,50 +17,39 @@ function App() {
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(true); // Estado para controlar la visibilidad del mensaje de bienvenida y los enlaces
   const [showAddUser, setShowAddUser] = useState(false);
 
-
-  const handleToggleView = () => {
-    setShowLogin(!showLogin);
-    setShowWelcomeMessage(true);
-  };
-
-  // FunciÃ³n para activar el juego y ocultar el resto de la interfaz
+  // Función para activar el juego y ocultar el resto de la interfaz
   const startGame = () => {
     setShowLogin(false);
     setShowGame(true);
     setShowWelcomeMessage(false);
     setShowAddUser(false);
   };
+
+  const showAddUserForm = () => {
+    setShowLogin(false);
+    setShowAddUser(true);
+    setShowWelcomeMessage(false);
+  };
+
+  const showLoginForm = () => {
+    setShowLogin(true);
+    setShowAddUser(false);
+    setShowWelcomeMessage(false);
+  };
  
   return (
     <Container component="main" maxWidth="xs" sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <CssBaseline />
-      {/* Mostrar el mensaje de bienvenida y los enlaces solo si showWelcomeMessage es true */}
-      {showWelcomeMessage && (
-        <Typography component="h1" variant="h5" align="center" sx={{ marginTop: 2 }}>
-          Welcome to Wiq-es05
-          <Typography component="div" align="center" sx={{ marginTop: 2 }}>
-            {showLogin ? (
-              <Link name="gotoregister" component="button" variant="body2" onClick={handleToggleView}>
-                Don't have an account? Register here.
-              </Link>
-            ) : (
-              <Link component="button" variant="body2" onClick={handleToggleView}>
-                Already have an account? Login here.
-              </Link>
-            )}
-          </Typography>
-        </Typography>
-      )}
 
     {showLogin && (
       <ChakraProvider>
-        <Login startGame={startGame} />
+        <Login startGame={startGame} showAddUserForm={showAddUserForm}/>
       </ChakraProvider>
     )}
 
     {!showLogin && !showGame && (
       <ChakraProvider>
-        <AddUser />
+        <AddUser showLoginForm={showLoginForm} />
       </ChakraProvider>
     )}
 
@@ -71,7 +60,7 @@ function App() {
       )}
     </Container>
   );
-  
+
 }
 
 export default App;
