@@ -23,7 +23,7 @@ function App() {
     setShowWelcomeMessage(true);
   };
 
-  // Función para activar el juego y ocultar el resto de la interfaz
+  // FunciÃ³n para activar el juego y ocultar el resto de la interfaz
   const startGame = () => {
     setShowLogin(false);
     setShowGame(true);
@@ -52,12 +52,18 @@ function App() {
         </Typography>
       )}
 
-      {showLogin && <Login startGame={startGame} />}
-      {!showLogin && !showGame && (
-          <ChakraProvider>
-            <AddUser />
-          </ChakraProvider>
-      )}
+    {showLogin && (
+      <ChakraProvider>
+        <Login startGame={startGame} />
+      </ChakraProvider>
+    )}
+
+    {!showLogin && !showGame && (
+      <ChakraProvider>
+        <AddUser />
+      </ChakraProvider>
+    )}
+
       {showGame && (
         <ChakraProvider>
           <Game />
