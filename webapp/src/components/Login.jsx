@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert, Link } from '@chakra-ui/react';
-import PropTypes from 'prop-types';
 
 const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
 
-const Login = ({ startGame, showAddUserForm  }) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -29,10 +28,6 @@ const Login = ({ startGame, showAddUserForm  }) => {
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
-  };
-
-  const handleButtonClick = () => {
-    startGame();
   };
 
   return (
@@ -76,7 +71,6 @@ const Login = ({ startGame, showAddUserForm  }) => {
           mt="4"
           colorScheme="teal"
           variant="solid"
-          onClick={handleButtonClick}
           size="lg"
           width="100%"
           _hover={{ bg: '#107869' }}
@@ -84,10 +78,10 @@ const Login = ({ startGame, showAddUserForm  }) => {
           Start the game
         </Button>
         <Link
+          to = "/register"
           name="gotoregister"
           component="button"
           variant="body2"
-          onClick={showAddUserForm}
           sx={{
             textDecoration: 'underline',
             cursor: 'pointer',
@@ -103,10 +97,6 @@ const Login = ({ startGame, showAddUserForm  }) => {
       </Box>
     </Center>
   );
-};
-
-Login.propTypes = {
-  startGame: PropTypes.func.isRequired,
 };
 
 export default Login;

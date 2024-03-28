@@ -6,7 +6,7 @@ import { QuestionArea } from './QuestionArea';
 
 const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
 
-const AddUser = ({showLoginForm}) => {
+const AddUser = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [repPassword, setRepPassword] = useState('');
@@ -79,10 +79,10 @@ const AddUser = ({showLoginForm}) => {
           Add User
         </Button>
         <Link
+          to = "/login"
           name="gotologin"
           component="button"
           variant="body2"
-          onClick={showLoginForm}
           sx={{
             textDecoration: 'underline',
             cursor: 'pointer',
@@ -106,7 +106,7 @@ const AddUser = ({showLoginForm}) => {
           </Alert>
         )}
       </Box>
-      </Center>
+    </Center>
   );
 };
 
