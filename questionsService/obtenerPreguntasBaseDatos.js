@@ -7,7 +7,7 @@ const Respuesta = mongoose.model('Respuesta');
 
 class ObtenerPreguntas{
 
-    async obtenerPregunta(){    
+    async obtenerPregunta(){
         var resultado = {};
 
         var pregunta = await Pregunta.aggregate([{ $sample: { size: 1 } }]);

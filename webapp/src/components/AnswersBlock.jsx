@@ -32,7 +32,6 @@ export function AnswersBlock({ respuestas, correcta }){
         } else {
             alert("Respuesta incorrecta.");
         }
-        console.log("owimawe");
     };
 
     return (
