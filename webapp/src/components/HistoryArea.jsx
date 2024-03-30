@@ -2,7 +2,8 @@
 
 import React, { useEffect, useState } from 'react';
 import { Box, Center, Text } from "@chakra-ui/react";
-import { getCorrectAnswers, getFailedAnswers, getTotalGames } from './history-utils.js';
+import axios from 'axios';
+import { getCorrectAnswers, getFailedAnswers, getTotalGames } from './history-utils';
 
 export function HistoryArea({ userName }) {
   const [correctAnswers, setCorrectAnswers] = useState(0);
@@ -10,17 +11,18 @@ export function HistoryArea({ userName }) {
   const [totalGames, setTotalGames] = useState(0);
 
   useEffect(() => {
-    const baseUrl = 'http://localhost:8004/historydb/history';
+    const apiEndpoint = process.env.REACT_APP_API_ENDPOINT || 'http://localhost:8000';
 
     const fetchHistoryData = async () => {
       try {
-        const correctAnswers = await getCorrectAnswers(baseUrl, userName);
+        const response = await axios.get(`${apiEndpoint}/correct/${userName}`);
+        const correctAnswers = response.data;
         setCorrectAnswers(correctAnswers);
 
-        const failedAnswers = await getFailedAnswers(baseUrl, userName);
+        const failedAnswers = await getFailedAnswers(apiEndpoint, userName);
         setFailedAnswers(failedAnswers);
 
-        const totalGames = await getTotalGames(baseUrl, userName);
+        const totalGames = await getTotalGames(apiEndpoint, userName);
         setTotalGames(totalGames);
       } catch (error) {
         console.error('Error fetching history data:', error);

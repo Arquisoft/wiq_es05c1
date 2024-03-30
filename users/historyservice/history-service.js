@@ -15,7 +15,7 @@ const mongoUri = process.env.MONGODB_URI || 'mongodb://localhost:27017/historydb
 mongoose.connect(mongoUri);
 
 // Route to increment correct answers for a user
-app.patch('/history/correct/:username', async (req, res) => {
+app.patch('/correctinc/:username', async (req, res) => {
   try {
     const { username } = req.params;
 
@@ -29,7 +29,7 @@ app.patch('/history/correct/:username', async (req, res) => {
 });
 
 // Route to increment failed answers for a user
-app.patch('/history/failed/:username', async (req, res) => {
+app.patch('/failedinc/:username', async (req, res) => {
   try {
     const { username } = req.params;
 
@@ -43,7 +43,7 @@ app.patch('/history/failed/:username', async (req, res) => {
 });
 
 // Route to increment total games for a user
-app.patch('/history/games/:username', async (req, res) => {
+app.patch('/gamesinc/:username', async (req, res) => {
   try {
     const { username } = req.params;
 
@@ -57,7 +57,7 @@ app.patch('/history/games/:username', async (req, res) => {
 });
 
 // Route to get correct answers for a user
-app.get('/history/correct/:username', async (req, res) => {
+app.get('/correct/:username', async (req, res) => {
   try {
     const { username } = req.params;
     const history = await History.findOne({ username });
@@ -68,7 +68,7 @@ app.get('/history/correct/:username', async (req, res) => {
 });
 
 // Route to get failed answers for a user
-app.get('/history/failed/:username', async (req, res) => {
+app.get('/failed/:username', async (req, res) => {
   try {
     const { username } = req.params;
     const history = await History.findOne({ username });
@@ -79,11 +79,30 @@ app.get('/history/failed/:username', async (req, res) => {
 });
 
 // Route to get total games for a user
-app.get('/history/games/:username', async (req, res) => {
+app.get('/games/:username', async (req, res) => {
   try {
     const { username } = req.params;
     const history = await History.findOne({ username });
     res.json({ totalGames: history ? history.total_games : 0 });
+  } catch (error) {
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Route to add new user history
+app.post('/addhistory', async (req, res) => {
+  try {
+    const { username } = req.body.username;
+
+    const newHistory = new History({
+      total_correct_answers: 0,
+      total_failed_answers: 0,
+      total_games: 0,
+      username: username,
+    });
+
+    await newHistory.save();
+    res.json(newHistory);
   } catch (error) {
     res.status(500).json({ error: 'Internal Server Error' });
   }
