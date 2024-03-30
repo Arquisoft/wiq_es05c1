@@ -1,3 +1,5 @@
+//gateway-service.js
+
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -68,6 +70,26 @@ app.get('/correct/:username', async (req, res) => {
   try {
     // llamamos al servicio de preguntas
     const historyResponse = await axios.get(historyServiceUrl+`/correct/${req.params.username}`, req.body);
+    res.json(historyResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.get('/failed/:username', async (req, res) => {
+  try {
+    // llamamos al servicio de preguntas
+    const historyResponse = await axios.get(historyServiceUrl+`/failed/${req.params.username}`, req.body);
+    res.json(historyResponse.data);
+  } catch (error) {
+    res.status(error.response.status).json({ error: error.response.data.error });
+  }
+});
+
+app.get('/games/:username', async (req, res) => {
+  try {
+    // llamamos al servicio de preguntas
+    const historyResponse = await axios.get(historyServiceUrl+`/games/${req.params.username}`, req.body);
     res.json(historyResponse.data);
   } catch (error) {
     res.status(error.response.status).json({ error: error.response.data.error });
