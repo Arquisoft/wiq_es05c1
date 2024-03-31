@@ -1,25 +1,29 @@
 import React from 'react';
-import { Route, Routes } from "react-router";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ChakraProvider, theme } from '@chakra-ui/react';
 import AddUser from './components/AddUser';
 import Login from './components/Login';
 import Menu from './components/GameMenu';
 import Game from './components/Game';
+// import Record './components/Record';
 
-function App() {
+const App = () => {
   const config = {}; // Definir tu configuración
   const swapConfig = () => {}; // Definir la función para cambiar la configuración
   const auth = {}; // Definir tu autenticación
   // <Route path="*" element={<Error />} />
+  // <Route path="/record" element={<Record />} />
 
   return (
-    <ChakraProvider theme={theme}>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/register" element={<AddUser />} />
-        <Route path="/menu" element={<Menu />} />
-        <Route path="/game" element={<Game />} />
-      </Routes>
+    <ChakraProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/register" element={<AddUser />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/game" element={<Game />} />
+        </Routes>
+      </Router>
     </ChakraProvider>
   );
 }

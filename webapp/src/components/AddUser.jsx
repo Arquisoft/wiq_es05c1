@@ -79,7 +79,7 @@ const AddUser = () => {
           Add User
         </Button>
         <Link
-          to = "/login"
+          href = "/"
           name="gotologin"
           component="button"
           variant="body2"

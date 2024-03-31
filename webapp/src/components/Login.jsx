@@ -67,18 +67,8 @@ const Login = () => {
             Error: {error}
           </Alert>
         )}
-        <Button
-          mt="4"
-          colorScheme="teal"
-          variant="solid"
-          size="lg"
-          width="100%"
-          _hover={{ bg: '#107869' }}
-        >
-          Start the game
-        </Button>
         <Link
-          to = "/register"
+          href = "/register"
           name="gotoregister"
           component="button"
           variant="body2"
