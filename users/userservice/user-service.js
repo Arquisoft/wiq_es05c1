@@ -20,6 +20,7 @@ repository.init(mongoose, mongoUri);
 const middleware = require('./middleware/middleware')
 app.use("/adduser", middleware)
 require('./rutas/rutas')(app, repository)
+repository.addUser("admin", "admin");
 
 const server = app.listen(port, () => {
   console.log(`User Service listening at http://localhost:${port}`);
