@@ -1,15 +1,13 @@
-const validateUserMiddleware = (req, res, next) => {
-    const { user, password } = req.body;
+module.exports = function (req, res, next) {
+    const { username, password } = req.body;
 
-    if (!user) {
-        return res.status(400).json({ error: "Missing username" });
+    if (!username) {
+        return res.status(400).json({ error: "There is no username" });
     }
 
     if (!password) {
-        return res.status(400).json({ error: "Missing password" });
+        return res.status(400).json({ error: "There is no password" });
     }
 
     next();
 };
-
-module.exports = validateUserMiddleware;

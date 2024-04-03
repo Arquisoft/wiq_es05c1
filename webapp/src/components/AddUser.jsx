@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Box, Center, Text, Input, Button, FormControl, FormLabel, Alert, Link } from '@chakra-ui/react';
-import { QuestionArea } from './QuestionArea';
 
 const apiEndpoint = process.env.REACT_APP_API_URI || 'http://localhost:8000';
 
